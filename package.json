@@ -1,7 +1,9 @@
 {
   "name": "raw-copy-devtools-extension",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
+  "description": "Chrome/Edge DevTools 扩展：一键复制选中网络请求的完整请求与响应原始信息为纯文本",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "test": "node --test \"tests/**/*.test.mjs\"",
