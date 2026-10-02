@@ -1,0 +1,48 @@
+{
+  "step": "3.1",
+  "phase": "③ 技术评估",
+  "agent": "butler-tech-eval",
+  "timestamp": "2026-10-02T12:35:00+08:00",
+  "slug": "在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/design.md"
+    ],
+    "O": [
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/requirement.md",
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/spec.json",
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/checklist.md",
+      "butler/project/overview.md",
+      "butler/domain/architecture.md",
+      "butler/domain/development.md",
+      "butler/learned/butler-tech-eval.md (不存在 → 首运行，无历史)",
+      "extension/panel.js (891 行，主接线面)",
+      "extension/src/selection.js (275 行，冻结契约)",
+      "extension/src/formatter.js (333 行，冻结契约)",
+      "extension/src/render.js (316 行，data-index/data-id 契约)",
+      "extension/src/i18n.js (255 行，dict 契约)",
+      "extension/src/content.js (classifyBody/isOverThreshold)",
+      "extension/src/clipboard.js (copyText 双路径)",
+      "extension/panel.html (125 行，稳定 id 契约)",
+      "extension/manifest.json (14 行)",
+      "extension/styles/panel.css (387 行)",
+      "scripts/check-panel-shell.mjs (面板外壳门禁)",
+      "scripts/package.mjs (体积/零依赖/权限断言)",
+      "tests/i18n.test.mjs (键集对齐校验)",
+      "docs/USAGE.md / docs/INSTALL.md (交付物)"
+    ],
+    "missing": []
+  },
+  "upstream": [
+    "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/design.md",
+    "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/requirement.md",
+    "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/spec.json",
+    "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/feasibility.md",
+    "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/checklist.md"
+  ],
+  "status": "ready",
+  "notes": "M 文件齐备。本评估为增量增强：既有 extension/ 全量读盘取得真实行号锚点（design.md 的 A-1..A-6 锚点已用源码逐条复核）。冻结契约 selection.js/formatter.js 已确认现状签名。file-registry §1 无 spec/ 文件条目（历史一致），本次不登记 registry。"
+}

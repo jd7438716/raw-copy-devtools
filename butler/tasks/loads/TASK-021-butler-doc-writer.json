@@ -1,0 +1,28 @@
+{
+  "step": "6.x",
+  "agent": "butler-doc-writer",
+  "task": "TASK-021",
+  "slug": "在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增",
+  "ts": "2026-10-02T14:04:00+08:00",
+  "covers": ["DEL-008", "AC-017"],
+  "loaded": [
+    { "file": "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-021.md", "mark": "M", "status": "ok", "note": "冻结要求：privacy.html 单条→一条或多条 + 控制权节补多选说明；同步核对 INSTALL/USAGE/docs" },
+    { "file": "butler/file-registry.md", "mark": "M", "status": "ok", "note": "§1a-8 文档交付登记；镜像约束（USAGE/INSTALL 根+docs 逐字节一致）" },
+    { "file": "butler/CONSTITUTION.md", "mark": "M", "status": "ok", "note": "红线：仅文档/静态页面改动" },
+    { "file": "butler/memory/corrections.md", "mark": "M", "status": "ok" },
+    { "file": "butler/project/overview.md", "mark": "O", "status": "ok", "note": "L19「只复制单条」为基线表述，未在本次范围（docs/ 之外），仅记录" },
+    { "file": "butler/learned/butler-doc-writer.md", "mark": "O", "status": "ok" },
+    { "file": "butler/domain/development.md", "mark": "O", "status": "ok", "note": "单条冻结契约 / 批量外层聚合单一真源" },
+    { "file": "extension/privacy.html", "mark": "M", "status": "ok", "note": "发行包白名单文件；L127-128「单条」为待修订锚点" },
+    { "file": "INSTALL.md", "mark": "M", "status": "ok", "note": "L10 描述与 USAGE 一致性核对" },
+    { "file": "docs/INSTALL.md", "mark": "M", "status": "ok", "note": "与根 INSTALL.md 镜像（cmp 一致）" },
+    { "file": "USAGE.md", "mark": "M", "status": "ok", "note": "§7/§12 已含多选覆盖声明；核对无冲突" },
+    { "file": "docs/USAGE.md", "mark": "M", "status": "ok", "note": "与根 USAGE.md 镜像（cmp 一致）" },
+    { "file": "docs/DELIVERABLES-CHECKLIST.md", "mark": "M", "status": "ok", "note": "docs/ 内发现 L135 陈旧引文「只复制当前选中的单条请求」→ 修订" },
+    { "file": "butler/memory/documentation.md", "mark": "O", "status": "ok", "note": "L28 陈旧约定「只复制当前单条」→ 反哺修订" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/sec-audit.md", "mark": "O", "status": "ok", "note": "F-06 / RISK-DOC-01 来源与处置（§0/§4.3/§8.3/§10.5）" }
+  ],
+  "missing_context": [],
+  "gate_scripts": ["scripts/check-syntax.mjs", "scripts/check-manifest.mjs", "scripts/check-panel-shell.mjs", "scripts/check-zero-network.mjs"],
+  "touches_source": "NO (仅 extension/privacy.html + docs/*.md + INSTALL/USAGE；未改任何 .js)"
+}

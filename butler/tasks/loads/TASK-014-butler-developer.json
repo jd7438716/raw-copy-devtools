@@ -1,0 +1,28 @@
+{
+  "step": "TASK-014-butler-developer",
+  "agent": "butler-developer",
+  "timestamp": "2026-10-02",
+  "task": "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/TASK-014.md",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md (C-4 / ADR-010 / ADR-011 / REQ-031 / REQ-032 / AC-017)",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/spec.json (DEL-015/DEL-016/REQ-031/REQ-032/AC-017/AC-019)",
+      "butler/domain/development.md",
+      "butler/domain/testing.md",
+      "butler/learned/butler-developer.md"
+    ],
+    "O": [
+      "extension/manifest.json",
+      "package.json",
+      "scripts/gen-icons.mjs",
+      "scripts/check-syntax.mjs",
+      "scripts/check-manifest.mjs",
+      "scripts/check-zero-network.mjs",
+      "extension/** (21 files, 打包目标)"
+    ]
+  },
+  "missing_context": []
+}

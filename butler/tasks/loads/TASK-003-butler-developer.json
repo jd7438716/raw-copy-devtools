@@ -1,0 +1,31 @@
+{
+  "step": "TASK-003",
+  "agent": "butler-developer",
+  "task": "TASK-003",
+  "slug": "新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto",
+  "timestamp": "2026-10-02",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/requirement.md",
+      "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/TASK-003.md"
+    ],
+    "O": [
+      "butler/project/overview.md",
+      "butler/domain/development.md",
+      "butler/domain/testing.md",
+      "butler/learned/butler-developer.md",
+      "butler/memory/pair/TASK-002/round-01/developer-output.md"
+    ]
+  },
+  "notes": [
+    "no frame skeleton for TASK-003 (direct backlog task, same as TASK-002 precedent); design.md §5.3 is the interface source of truth",
+    "design.md interface table wins over TASK-003.md legacy file names (request-store.js/har-map.js -> extension/src/store.js + capture.js)",
+    "existing: extension/src/i18n.js, panel.html/js/css, manifest.json/devtools.js, icons present",
+    "scripts/check-syntax.mjs present (build/lint gate)",
+    "no butler/memory/ai-orchestration.json (DAG generator not applicable)"
+  ]
+}

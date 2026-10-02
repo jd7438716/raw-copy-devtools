@@ -1,0 +1,28 @@
+{
+  "step": "TASK-011",
+  "agent": "butler-qa",
+  "loaded_at": "2026-10-02",
+  "task_file": "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/TASK-011.md",
+  "registry": "butler/file-registry.md",
+  "must_read": [
+    "butler/CONSTITUTION.md",
+    "butler/memory/corrections.md",
+    "butler/file-registry.md",
+    "butler/tasks/backlog/.../TASK-011.md",
+    "butler/spec/.../design.md",
+    "butler/spec/.../checklist.md",
+    "butler/spec/.../requirement.md",
+    "butler/spec/.../spec.json"
+  ],
+  "optional_read": [
+    "butler/learned/butler-qa.md (empty)",
+    "butler/domain/testing.md",
+    "butler/domain/security.md",
+    "tests/README.md",
+    "tests/*.test.mjs (9 files)",
+    "scripts/check-*.mjs (4 files)"
+  ],
+  "missing": [],
+  "outputs": ["tests/test-cases.md", "tests/README.md"],
+  "status": "complete"
+}

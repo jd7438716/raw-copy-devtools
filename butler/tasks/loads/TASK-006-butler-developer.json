@@ -1,0 +1,39 @@
+{
+  "step": "TASK-006",
+  "agent": "butler-developer",
+  "task": "TASK-006",
+  "timestamp": "2026-10-02T14:30:00+08:00",
+  "slug": "新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/config.json",
+      "butler/file-registry.md",
+      "butler/memory/corrections.md"
+    ],
+    "O": [
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/requirement.md",
+      "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/TASK-006.md",
+      "butler/file-registry.md (§3)",
+      "butler/plan/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/plan.md",
+      "USAGE.md",
+      "extension/panel.js",
+      "extension/src/i18n.js",
+      "extension/src/capture.js",
+      "tests/README.md",
+      "scripts/check-syntax.mjs",
+      "scripts/check-panel-shell.mjs",
+      "scripts/check-zero-network.mjs"
+    ]
+  },
+  "frame": {
+    "path": "butler/memory/pair/TASK-006/frame/",
+    "status": "missing",
+    "note": "[MISSING_CONTEXT] 无 pair frame 产物；任务描述已内联完整交付标准，design.md §5.3 接口表 + ADR-006 为真源，按 backlog 直接实现。"
+  },
+  "missing": [
+    "butler/memory/pair/TASK-006/frame/ (frame-builder 产物，未生成；O 级，不阻塞)"
+  ],
+  "status": "ready"
+}

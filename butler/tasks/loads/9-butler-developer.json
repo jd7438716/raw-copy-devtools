@@ -1,0 +1,42 @@
+{
+  "step": "9",
+  "agent": "butler-developer",
+  "task": "TASK-009",
+  "slug": "新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto",
+  "timestamp": "2026-10-02",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/requirements/requirement.md (not present; butler/spec/.../requirement.md + spec.json used)",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md",
+      "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/TASK-009.md"
+    ],
+    "O": [
+      "butler/project/overview.md",
+      "butler/conventions.md",
+      "butler/domain/development.md",
+      "butler/domain/testing.md",
+      "butler/learned/butler-developer.md",
+      "butler/memory/ai-orchestration.md (absent)",
+      "butler/memory/ai-orchestration.json (absent)"
+    ],
+    "source": [
+      "extension/panel.html",
+      "extension/panel.js",
+      "extension/src/i18n.js",
+      "extension/manifest.json",
+      "extension/styles/panel.css",
+      "scripts/check-syntax.mjs",
+      "scripts/check-panel-shell.mjs",
+      "scripts/check-manifest.mjs"
+    ]
+  },
+  "notes": [
+    "panel.html already declares <a id=\"privacy-link\" href=\"privacy.html\"> (no target=_blank)",
+    "check-panel-shell.mjs scans panel.js string literals for Chinese + asserts exported structure -> append-only, no new Chinese literals",
+    "no butler/memory/pair/**/frame for this task; direct implementation per TASK-009",
+    "extension/ currently contains zero forbidden network/storage tokens (verified by grep)"
+  ]
+}

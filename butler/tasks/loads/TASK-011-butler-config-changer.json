@@ -1,0 +1,33 @@
+{
+  "step": "TASK-011-butler-config-changer",
+  "agent": "butler-config-changer",
+  "timestamp": "2026-10-02",
+  "task": "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-011.md",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/project/overview.md",
+      "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-011.md",
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/design.md (§8.3 安全门禁清单 / AC-012/013/016 / ADR-013)",
+      "extension/manifest.json"
+    ],
+    "O": [
+      "butler/project/conventions.md",
+      "scripts/check-manifest.mjs",
+      "scripts/check-syntax.mjs",
+      "scripts/check-zero-network.mjs",
+      "scripts/check-panel-shell.mjs",
+      "scripts/package.mjs",
+      "butler/memory/pair/TASK-001/round-01/developer-output.md (F-E 基线 manifest 内容)",
+      "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/dependency-graph.md"
+    ]
+  },
+  "missing_context": [],
+  "notes": [
+    "butler/learned/butler-config-changer.md 不存在（首次运行，INFO）",
+    "butler/project/conventions.md 存在",
+    "冲突: scripts/check-manifest.mjs:12/99 硬编码 version === \"1.0.0\"，与 TASK-011 bump 至 1.1.0 冲突（已上报 Captain）"
+  ]
+}

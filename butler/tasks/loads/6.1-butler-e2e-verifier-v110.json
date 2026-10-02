@@ -1,0 +1,29 @@
+{
+  "step": "6.1",
+  "agent": "butler-e2e-verifier",
+  "slug": "对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-",
+  "ts": "2026-10-02T16:55:00+08:00",
+  "phase": "Phase 6.1 UI/E2E 验收（spec 含 type=ui → 触发本步）",
+  "loaded": [
+    { "file": "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/spec.json", "mark": "M", "status": "ok", "note": "REQ-001..004/006..009 = type=ui → 命中触发；含 DEL-001..018 + AC-001..017" },
+    { "file": "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/spec.md", "mark": "M", "status": "ok", "note": "人读视图，与 spec.json 一致" },
+    { "file": "butler/file-registry.md", "mark": "M", "status": "ok", "note": "F-73 e2e-test-plan.md 状态 ⏳（缺失）" },
+    { "file": "extension/manifest.json", "mark": "M", "status": "ok", "note": "MV3 + permissions=[clipboardWrite]；版本 1.1.0" },
+    { "file": "extension/panel.html", "mark": "M", "status": "ok", "note": "UI 契约：#copy-btn-a/#copy-btn-b(data-copy-mode) 就位；#mode-toggle/#copy-req-btn/#copy-resp-btn 已移除；#multiselect-actions/#context-menu/#detail-pane" },
+    { "file": "extension/panel.js", "mark": "M", "status": "ok", "note": "onContextMenu 命中已选保留/未选替换（REQ-002）；A/B 双按钮 action=mode（REQ-006/007）" },
+    { "file": "extension/src/contextmenu.js", "mark": "M", "status": "ok", "note": "createMenuModel 仅 [copy-request-response] + count>=2 [copy-selected]；无 P2 项/canCopyRequestOnly" },
+    { "file": "extension/src/multiselection.js", "mark": "M", "status": "ok", "note": "extendTo additive 并集（REQ-004）" },
+    { "file": "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/e2e-artifacts/harness/{cdp.mjs,run-e2e.mjs}", "mark": "M", "status": "ok", "note": "真实 Chromium E2E 执行器（零依赖）；本步复制入本 slug 并对齐 spec AC 增补 AC-002a/002b/003（预期直接取自冻结 spec，未改预期）" },
+    { "file": "butler/requirements/e2e-test-plan.md", "mark": "M", "status": "MISSING", "note": "F-73 未产出（registry ⏳；本仓库历次 E2E 均缺）" }
+  ],
+  "missing_context": ["butler/requirements/e2e-test-plan.md (F-73, butler-e2e-planner 产出缺失)"],
+  "fallback_plan_source": "spec.md/spec.json 冻结的 AC-001..017 + 既有 e2e-artifacts/harness/run-e2e.mjs（设计阶段冻结，执行阶段不可篡改）",
+  "env_probe": {
+    "node": "v24.15.0",
+    "chrome": "Chrome/152.0.7977.84 @ C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "edge": "Edg/154.0.4258.48 @ C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "extension_load": "CDP Extensions.loadUnpacked（真实「加载已解压」）",
+    "app_target": "静态 MV3 扩展（无 npm run dev / dev server）",
+    "touches_source": "NO"
+  }
+}

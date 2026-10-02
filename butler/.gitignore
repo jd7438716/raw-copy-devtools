@@ -1,0 +1,8 @@
+# Butler2 运行时（易变/临时，默认忽略；知识/文档类不忽略）
+.butler2/
+logs/
+jobs/
+results/
+tasks/queue/
+tasks/skips/
+# 若想完全忽略 butler/：把本文件内容改成一行 `*`

@@ -1,0 +1,66 @@
+{
+  "step": "TASK-019",
+  "agent": "butler-sec-auditor",
+  "task": "TASK-019",
+  "slug": "在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增",
+  "ts": "2026-10-02T13:5x:00+08:00",
+  "mode": "独立安全审计（评审式，非巡检）",
+  "scope": "changed ∪ affected",
+  "scope_weight": "heavy（S1 全量人读 + S5 发行门 + 新增攻击面专审）",
+  "loaded": [
+    { "file": "butler/file-registry.md", "mark": "M", "status": "ok", "note": "§2 通用基线 + §3 加载清单；F-ENH* 增强登记面" },
+    { "file": "butler/CONSTITUTION.md", "mark": "M", "status": "ok", "note": "§19 安全红线 / §23 降级透明度 / §34 作用域 / 全局红线 15-16（risks/tech_debt YAML）" },
+    { "file": "butler/memory/corrections.md", "mark": "M", "status": "ok", "note": "首条为空（无历史纠错）" },
+    { "file": "butler/domain/security.md", "mark": "M", "status": "ok", "note": "领域约定（绕过模式 / timeout / 确定性检测层）" },
+    { "file": "butler/learned/sec-auditor.md", "mark": "M", "status": "ok", "note": "历史学习记录（仅自动采集段，无历史 pattern）" },
+    { "file": "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-019.md", "mark": "M", "status": "ok", "note": "审计范围/验证清单/硬约束（只读 + 只写 sec-audit.md + 复跑 5 门禁）" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/e2e-report.md", "mark": "M", "status": "ok", "note": "TASK-016 实机：Chrome 152 + Edge 154 双端 17/17；verdict=WARN；G-1/G-2/G-3" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/test-results.md", "mark": "M", "status": "ok", "note": "TASK-012 Rework Round 1：264/264 + 4 门禁 + 体积 136.10KB" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/design.md", "mark": "M", "status": "ok", "note": "ADR-013（禁 chrome.contextMenus）/ ADR-014/015/016/017/018/020 + §8 安全影响评估" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/requirement.md", "mark": "M", "status": "ok", "note": "AC-012/013/016 原文 + REQ-018..021（spec.json 核准标题）" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/spec.json", "mark": "M", "status": "ok", "note": "机器真源：REQ-018 MV3 / REQ-019 零依赖 / REQ-020 最小权限 / REQ-021 零网络" },
+    { "file": "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/sec-audit.md", "mark": "M", "status": "ok", "note": "上一里程碑 sec-audit（WARN）：RISK-MEM-01 / RISK-EXFIL-01 / RISK-OPEN-01 / RISK-LLM-INJ-01" },
+    { "file": "extension/panel.html", "mark": "M", "status": "ok", "note": "全量人读：DOM 契约 / 三容器初始 hidden / 无内联脚本" },
+    { "file": "extension/panel.js", "mark": "M", "status": "ok", "note": "全量人读（1927 行）：右键委托/菜单渲染/详情/多选/批量/P2 裁剪" },
+    { "file": "extension/styles/panel.css", "mark": "M", "status": "ok", "note": "全量人读：无 url()/@import/expression；overlay z-index 层级" },
+    { "file": "extension/src/contextmenu.js", "mark": "M", "status": "ok", "note": "全量人读：纯数据模型，零 DOM/零浏览器 API" },
+    { "file": "extension/src/detail.js", "mark": "M", "status": "ok", "note": "全量人读：textContent 注入 + 开合状态机 + onEvict" },
+    { "file": "extension/src/multiselection.js", "mark": "M", "status": "ok", "note": "全量人读：Set<id> 集合 + 剪枝 + onEvict" },
+    { "file": "extension/src/bulkformatter.js", "mark": "M", "status": "ok", "note": "全量人读：外层聚合，段内容委托冻结 formatter" },
+    { "file": "extension/manifest.json", "mark": "M", "status": "ok", "note": "顶层仅 7 键；permissions=[clipboardWrite]" },
+    { "file": "extension/src/{store,capture,clipboard,i18n,content,formatter}.js", "mark": "O", "status": "ok", "note": "RISK-MEM-01/-EXFIL-01 复核所需（字节预算 / enrich 队列 / 剪贴板 / i18n t() / classifyBody）" },
+    { "file": "extension/privacy.html", "mark": "O", "status": "ok", "note": "受影响面：隐私声明与增强后行为一致性核对" },
+    { "file": "scripts/{check-syntax,check-manifest,check-zero-network,check-panel-shell,package}.mjs", "mark": "M", "status": "ok", "note": "S4 供应链/构建；门禁复核 + 覆盖缺口评估" },
+    { "file": "package.json", "mark": "M", "status": "ok", "note": "零运行时/开发依赖，无 lockfile" },
+    { "file": "dist/raw-copy-1.1.0.zip", "mark": "M", "status": "ok", "note": "S5 发行产物：独立 EOCD/中央目录/CRC 读回审计" },
+    { "file": "butler/project/security-constraints.md", "mark": "O", "status": "MISSING", "note": "项目特定安全约束表不存在（沿用 agent 通用五面契约）" }
+  ],
+  "missing_context": [
+    "butler/project/security-constraints.md（可选，未产出；无项目专属红线需加载）"
+  ],
+  "mechanical_reruns": [
+    "node scripts/check-syntax.mjs -> 15/15 PASS exit=0",
+    "node scripts/check-manifest.mjs -> PASS 17/17 exit=0",
+    "node scripts/check-zero-network.mjs -> PASS 17/17 (18 files) exit=0",
+    "node scripts/check-panel-shell.mjs -> PASS 34/34 exit=0",
+    "node scripts/package.mjs -> PASS (体积/依赖审计/zip 读回) exit=0"
+  ],
+  "independent_probes": [
+    "ZIP 独立解析（EOCD + 中央目录 + inflate + CRC32 复算 + 黑名单）",
+    "PROBE A: store 字节预算有界性（200 x 1MB -> 63 条 / 63.01MB <= 64MB）",
+    "PROBE B: P2 分段裁剪 vs 不可信正文伪造段标记（复现跨段混淆）",
+    "PROBE C: 批量复制总量（60 x 50KB -> 2.95MB 入剪贴板，无 confirm）",
+    "butler_sec_scan x7（panel.js / 4 新模块 / manifest.json / privacy.html）全 R1-R11 PASS"
+  ],
+  "read_only_guarantee": {
+    "business_code_touched": false,
+    "tests_touched": false,
+    "gate_scripts_touched": false,
+    "file_registry_touched": false,
+    "artifact_rebuilt": "dist/raw-copy-1.1.0.zip（TASK-019 S5 授权复跑 package.mjs；sha256 24c2089a… -> 6f2514a9…，原因见报告 §7）"
+  },
+  "result": {
+    "report": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/sec-audit.md",
+    "verdict": "WARN"
+  }
+}

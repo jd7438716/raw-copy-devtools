@@ -1,0 +1,404 @@
+以下是一份可直接发给开发者的需求文档。核心已经按你的要求写清楚：**只复制单条请求，复制请求 + 响应的完整原始信息，输出纯文本，不做 JSON 美化，最多只加简单标题分隔。**
+
+---
+
+# Chrome DevTools 单条网络请求原始信息一键复制扩展 需求文档
+
+## 1. 文档信息
+
+- **版本**：v1.0
+- **日期**：2026-10-02
+- **目标平台**：Google Chrome / Microsoft Edge（Chromium 内核）
+- **扩展形态**：Manifest V3 DevTools 扩展
+- **核心场景**：调试网络请求时，一键复制**单条请求**的完整请求信息与响应结果，直接粘贴给 AI 分析。
+
+---
+
+## 2. 背景与问题
+
+当前 Chrome DevTools 的 Network 面板中，复制单条请求的信息非常麻烦：
+
+- 请求头、请求体、响应头、响应体分散在不同标签页；
+- 只能分别复制，无法一次性拿到完整请求 + 响应；
+- 原生“Copy as cURL”只包含请求，不包含响应；
+- 原生 HAR 导出只能导出全部或选中多条，且格式复杂；
+- 用户往往只需要**某一条请求**，不想把无关请求一起复制。
+
+因此需要一个轻量、安全、专注的 DevTools 扩展，实现：
+
+> **选中单条请求 → 一键复制完整请求 + 完整响应 → 输出纯文本 → 直接发给 AI。**
+
+---
+
+## 3. 目标
+
+### 3.1 核心目标
+
+- 在 DevTools 中新增一个面板，实时展示当前页面的网络请求列表。
+- 用户可选中**任意一条**请求，一键复制该请求的完整信息与响应结果。
+- 复制内容为**纯文本**，保留原始内容。
+- **不进行 JSON 美化、不重新格式化、不改变原始响应体。**
+- 只复制当前选中的那一条请求，绝不附带其他请求。
+
+### 3.2 非目标
+
+以下内容明确不做：
+
+- 不复制全部请求；
+- 不自动上传数据到任何服务器；
+- 不自动发送给 AI；
+- 不做 JSON 美化、压缩、排序、语法高亮；
+- 不修改、拦截、阻断任何网络请求；
+- 不收集用户数据、不埋点、不遥测；
+- 不请求与功能无关的敏感权限。
+
+---
+
+## 4. 目标用户
+
+- 前端开发：调试 API，需要把请求和响应完整发给 AI 分析。
+- 测试工程师：提交 Bug 时，需要附上完整的请求与响应原始信息。
+- 后端开发：排查接口问题时，需要查看浏览器实际发出的请求与收到的响应。
+- 技术支持：需要把用户侧请求完整复制出来分析。
+
+---
+
+## 5. 功能需求
+
+### 5.1 DevTools 面板
+
+- 安装扩展后，打开 Chrome DevTools，出现一个新面板。
+- 面板名称建议：`Raw Copy` 或 `请求复制`。
+- 面板位置：与 Elements、Console、Network 等并列。
+
+### 5.2 请求捕获
+
+- 自动捕获当前页面产生的网络请求。
+- 支持类型：XHR、Fetch、Document、Script、Stylesheet、Image、Font、Media、WebSocket 等。
+- 默认捕获全部，但提供过滤功能。
+- 列表实时更新，新请求自动追加。
+- 内存中最多保留最近 N 条，默认 1000 条，避免内存泄漏。
+
+### 5.3 请求列表
+
+列表每行显示：
+
+- 请求方法：GET / POST / PUT / DELETE 等
+- URL
+- 状态码：200 / 404 / 500 等
+- 资源类型：XHR / Fetch / Document 等
+- 耗时：毫秒
+- 大小：响应大小
+- 时间：请求开始时间
+
+列表支持：
+
+- 按 URL 关键字搜索；
+- 按请求方法过滤；
+- 按状态码过滤；
+- 按资源类型过滤；
+- 点击某一行选中该请求；
+- 支持键盘上下键切换选中项。
+
+### 5.4 单条复制
+
+选中一条请求后，提供按钮：
+
+- **复制请求 + 响应（原始）**
+- 可选附加按钮：**仅复制请求**、**仅复制响应**、**复制为 cURL**（非必须）
+
+点击“复制请求 + 响应（原始）”后：
+
+1. 只处理当前选中的这一条请求；
+2. 拼接完整请求信息和响应信息；
+3. 写入系统剪贴板；
+4. 界面提示“已复制”。
+
+### 5.5 复制内容要求
+
+复制内容必须包含：
+
+**请求部分：**
+- 请求方法
+- 完整 URL
+- HTTP 版本（如无法获取，可写 `HTTP/1.1`）
+- 请求头，按原始顺序，每行 `Name: Value`
+- 请求体，如果有，保持原始文本，不美化
+
+**响应部分：**
+- HTTP 状态码
+- 状态文本
+- 响应头，按原始顺序，每行 `Name: Value`
+- 响应体，保持原始文本，不美化
+
+**可选元信息：**
+- 请求开始时间
+- 总耗时
+- 资源类型
+- MIME 类型
+
+元信息建议放在开头或结尾的简单标题段中，不能干扰请求/响应正文。
+
+### 5.6 复制格式
+
+提供两种模式，默认“简单格式化”：
+
+#### 模式 A：简单格式化（默认）
+
+```
+===== REQUEST =====
+GET https://example.com/api/data?x=1 HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 ...
+Accept: application/json
+Cookie: session=abc
+
+[Request Body]
+{"query":"test"}
+
+===== RESPONSE =====
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 123
+Set-Cookie: ...
+
+[Response Body]
+{"code":0,"data":{"id":1}}
+```
+
+#### 模式 B：纯原始模式
+
+不加任何标题，直接拼接：
+
+```
+GET https://example.com/api/data?x=1 HTTP/1.1
+Host: example.com
+...
+
+{"query":"test"}
+
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+...
+
+{"code":0,"data":{"id":1}}
+```
+
+### 5.7 明确禁止的格式化行为
+
+- 不解析 JSON；
+- 不对 JSON 做缩进、换行、排序；
+- 不压缩 JSON；
+- 不把响应体转成 `JSON.stringify` 后的对象；
+- 不改变原始响应体的任何字符；
+- 不把响应体自动转成 Markdown 代码块；
+- 不截断文本，除非用户配置或响应过大触发提示。
+
+### 5.8 大响应与二进制处理
+
+- 文本响应：默认完整复制。
+- 超过阈值（例如 10MB）：提示用户“响应较大，是否继续复制”，避免卡死。
+- 二进制响应：图片、视频、字体等，不复制二进制内容，显示：
+  ```
+  [Binary content omitted: image/png, 45678 bytes]
+  ```
+- Base64 编码响应：如果是文本类 MIME，尝试按 UTF-8 解码为文本；否则标注：
+  ```
+  [Base64 content omitted: length 12345]
+  ```
+
+### 5.9 剪贴板与提示
+
+- 复制成功：显示 Toast 或状态栏提示“已复制到剪贴板”。
+- 复制失败：提示失败原因。
+- 复制内容不经过任何网络传输。
+
+---
+
+## 6. 交互流程
+
+1. 用户打开 DevTools。
+2. 进入“Raw Copy”面板。
+3. 页面产生请求，列表实时显示。
+4. 用户搜索或过滤，找到目标请求。
+5. 点击选中该请求。
+6. 点击“复制请求 + 响应（原始）”。
+7. 剪贴板获得完整纯文本。
+8. 用户粘贴给 AI。
+
+---
+
+## 7. 技术实现建议
+
+### 7.1 扩展架构
+
+- Manifest V3。
+- 使用 `devtools_page` 注册 DevTools 页面。
+- 使用 `chrome.devtools.panels.create` 创建面板。
+- 在面板 JS 中使用：
+  - `chrome.devtools.network.onRequestFinished.addListener`
+  - 获取 HAR entry
+- 将 HAR entry 缓存在内存数组中。
+- 使用原生 JavaScript 实现 UI，避免引入第三方框架和供应链风险。
+- 不需要 background service worker。
+- 不需要 content script。
+
+### 7.2 权限
+
+建议最小权限：
+
+```json
+{
+  "manifest_version": 3,
+  "name": "Raw Copy - DevTools Request Copier",
+  "version": "1.0.0",
+  "devtools_page": "devtools.html",
+  "permissions": ["clipboardWrite"]
+}
+```
+
+要求：
+
+- 不申请 `<all_urls>`；
+- 不申请 `host_permissions`；
+- 不申请 `tabs`；
+- 不申请 `webRequest`；
+- 不申请 `declarativeNetRequest`；
+- 不包含任何网络请求代码。
+
+### 7.3 复制实现
+
+- 优先使用 `navigator.clipboard.writeText`。
+- 失败时降级使用 `document.execCommand('copy')`。
+- 复制内容在内存中拼接，不经过任何服务器。
+
+### 7.4 HAR 数据映射
+
+从 `entry` 中取：
+
+- `entry.request.method`
+- `entry.request.url`
+- `entry.request.headers`
+- `entry.request.postData.text`
+- `entry.response.status`
+- `entry.response.statusText`
+- `entry.response.headers`
+- `entry.response.content.text`
+- `entry.response.content.encoding`
+- `entry.response.content.mimeType`
+- `entry.time`
+- `entry.startedDateTime`
+
+拼接时：
+
+- headers 数组按顺序输出 `name: value`；
+- 响应体若 `encoding === "base64"`，按 MIME 判断是否解码；
+- 不解析 JSON。
+
+---
+
+## 8. 安全与隐私要求
+
+- 所有数据仅存在于 DevTools 内存中。
+- 关闭 DevTools 后数据销毁。
+- 不收集、不存储、不传输任何用户数据。
+- 无服务器、无分析、无遥测、无广告。
+- 不请求敏感权限。
+- 建议开源，许可证推荐 MIT 或 Apache-2.0。
+- 提供隐私政策页面，明确声明：
+  - 不收集数据；
+  - 不传输数据；
+  - 所有操作本地完成。
+
+---
+
+## 9. 非功能需求
+
+- **性能**：捕获请求不影响页面性能；列表支持虚拟滚动，1000 条不卡顿。
+- **兼容性**：支持最新版 Chrome 和 Edge。
+- **体积**：扩展包小于 200KB。
+- **依赖**：零第三方运行时依赖。
+- **界面语言**：中文优先，可预留英文。
+- **可靠性**：复制成功率 100%，异常有提示。
+
+---
+
+## 10. 验收标准
+
+开发者交付后，按以下标准验收：
+
+1. 安装扩展，打开 DevTools，能看到新面板。
+2. 访问任意网站，面板列表实时显示请求。
+3. 列表支持搜索、过滤、点击选中。
+4. 选中一条请求，点击“复制请求 + 响应（原始）”，剪贴板内容包含：
+   - 请求方法、URL、请求头、请求体；
+   - 响应状态码、响应头、响应体。
+5. 复制内容**不包含其他请求**。
+6. 如果响应体是 JSON，复制出来的 JSON 必须与原始响应体完全一致，**没有额外缩进、换行、排序**。
+7. 复制过程中，扩展不发出任何网络请求。
+8. 权限清单中无 `<all_urls>`、无 `host_permissions`、无 `webRequest`。
+9. 大响应和二进制响应按需求处理。
+10. 复制成功有明确提示。
+
+---
+
+## 11. 交付物
+
+- 完整源码；
+- 打包后的扩展 ZIP；
+- 安装说明；
+- 使用说明；
+- 隐私政策页面；
+- 测试用例；
+- 如开源，提供 LICENSE 文件。
+
+---
+
+## 12. 里程碑建议
+
+| 阶段 | 内容 |
+| :--- | :--- |
+| M1 | DevTools 面板框架搭建 |
+| M2 | 请求捕获与列表展示 |
+| M3 | 单条请求复制 + 原始文本拼接 |
+| M4 | 搜索、过滤、大响应处理 |
+| M5 | 测试、打包、隐私政策、交付 |
+
+---
+
+## 13. 附录：复制输出示例
+
+以下为“简单格式化”模式的完整示例，开发者应以此为验收参考：
+
+```
+===== REQUEST =====
+POST https://api.example.com/v1/login HTTP/1.1
+Host: api.example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+Content-Type: application/json
+Accept: application/json
+Cookie: sessionid=abc123
+
+[Request Body]
+{"username":"test","password":"123456"}
+
+===== RESPONSE =====
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 45
+Set-Cookie: token=xyz789; Path=/
+
+[Response Body]
+{"code":0,"message":"success","token":"xyz789"}
+```
+
+再次强调：
+
+- 响应体 `{"code":0,"message":"success","token":"xyz789"}` 必须原样输出；
+- 不允许格式化成多行；
+- 不允许排序字段；
+- 不允许添加 Markdown 代码块。
+
+---
+
+你可以直接把这份文档发给开发者。如果后续要加“复制为 cURL”“仅复制响应体”等附加功能，可以在非核心需求里单独列，不影响主线。

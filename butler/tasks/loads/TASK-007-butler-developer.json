@@ -1,0 +1,28 @@
+{
+  "task": "TASK-007",
+  "agent": "butler-developer",
+  "date": "2026-10-02",
+  "slug": "新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/TASK-007.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md"
+    ],
+    "O": [
+      "extension/panel.js",
+      "extension/src/formatter.js",
+      "extension/src/i18n.js",
+      "extension/styles/panel.css",
+      "extension/panel.html",
+      "tests/formatter.test.mjs",
+      "scripts/check-syntax.mjs",
+      "scripts/check-panel-shell.mjs",
+      "scripts/check-zero-network.mjs",
+      "package.json"
+    ]
+  },
+  "missing_context": []
+}

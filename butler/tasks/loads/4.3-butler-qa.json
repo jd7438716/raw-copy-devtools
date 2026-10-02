@@ -1,0 +1,33 @@
+{
+  "step": "4.3",
+  "agent": "butler-qa",
+  "timestamp": "2026-10-02T00:00:00+08:00",
+  "slug": "在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/requirement.md",
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/spec.json"
+    ],
+    "O": [
+      "butler/project/overview.md",
+      "butler/domain/testing.md",
+      "butler/domain/security.md",
+      "butler/learned/butler-qa.md",
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/spec.md",
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/feasibility.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/checklist.md"
+    ],
+    "missing": []
+  },
+  "upstream": [
+    "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/requirement.md",
+    "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/spec.json"
+  ],
+  "outputs": [
+    "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/checklist.md"
+  ],
+  "status": "ready"
+}

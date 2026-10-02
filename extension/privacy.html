@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>隐私政策 — Raw Copy</title>
+  <!--
+    privacy.html — 静态隐私政策页（TASK-009 / DEL-010 / REQ-027 / REQ-028 / AC-020）。
+
+    纯静态页面：不含任何脚本、不读写扩展状态、不发起网络请求、不使用持久化存储。
+    复用 styles/panel.css 的主题令牌与中文优先字体栈，仅内联一段最小排版样式，
+    避免为单页新增额外的 CSS 文件。
+  -->
+  <link rel="stylesheet" href="styles/panel.css">
+  <style>
+    /* 隐私政策页专属排版（复用 panel.css 的颜色令牌 / 字体 / 深色模式）。 */
+    .policy {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    .policy__title {
+      margin: 0 0 6px;
+      font-size: 22px;
+    }
+
+    .policy__updated {
+      margin: 0 0 24px;
+      color: var(--fg-muted);
+      font-size: 12px;
+    }
+
+    .policy__lede {
+      margin: 0 0 8px;
+      font-size: 13px;
+    }
+
+    .policy h2 {
+      margin: 28px 0 8px;
+      font-size: 15px;
+    }
+
+    .policy p,
+    .policy li {
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .policy ul {
+      margin: 8px 0;
+      padding-left: 20px;
+    }
+
+    /* 三项核心声明：高辨识卡片列表。 */
+    .policy__claims {
+      display: grid;
+      gap: 12px;
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .claim {
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      background: var(--bg-subtle);
+    }
+
+    .claim__title {
+      margin: 0 0 4px;
+      font-size: 14px;
+    }
+
+    .claim__desc {
+      margin: 0;
+      color: var(--fg-muted);
+    }
+
+    /* 敏感信息警示：显著但不刺眼的告警块。 */
+    .notice {
+      margin: 24px 0;
+      padding: 14px 16px;
+      border: 1px solid var(--danger-bg);
+      border-left: 4px solid var(--danger-bg);
+      border-radius: 6px;
+      background: var(--bg-subtle);
+    }
+
+    .notice__title {
+      margin: 0 0 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--danger-bg);
+    }
+
+    .notice p {
+      margin: 0;
+    }
+
+    .policy__code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      padding: 0 4px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: var(--bg);
+    }
+
+    .policy__foot {
+      margin-top: 28px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      color: var(--fg-muted);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <main class="policy">
+    <h1 class="policy__title">隐私政策</h1>
+    <p class="policy__updated">适用扩展：Raw Copy（Chrome / Edge DevTools 面板）&#183; 最后更新：2026-10-02</p>
+
+    <p class="policy__lede">
+      Raw Copy 是一个完全在本地运行的开发者工具扩展。它只做一件事：把你选中的
+      <strong>一条或多条</strong>网络请求的完整原始信息拼接为纯文本并写入剪贴板。
+      以下声明适用于本扩展的全部功能。
+    </p>
+
+    <p class="policy__lede">
+      一句话声明：本扩展<strong>不收集数据</strong>、<strong>不传输数据</strong>、
+      <strong>所有操作本地完成</strong>。本扩展<strong>不收集、不存储、不传输任何用户数据</strong>。
+    </p>
+
+    <h2>三项核心声明</h2>
+    <ul class="policy__claims">
+      <li class="claim">
+        <h3 class="claim__title">1. 不收集任何数据</h3>
+        <p class="claim__desc">
+          本扩展不记录、不汇总请求内容或页面信息，不进行用户画像，不采集任何使用行为，
+          也不生成任何统计或识别码。
+        </p>
+      </li>
+      <li class="claim">
+        <h3 class="claim__title">2. 不传输任何数据</h3>
+        <p class="claim__desc">
+          本扩展代码中不存在任何网络请求能力，不会把数据发送到任何服务器、第三方或云端。
+          所有处理都发生在你的浏览器本地。
+        </p>
+      </li>
+      <li class="claim">
+        <h3 class="claim__title">3. 所有操作在本地完成</h3>
+        <p class="claim__desc">
+          捕获、过滤、拼接与复制全部在你的设备上完成，不依赖任何后端服务。
+        </p>
+      </li>
+    </ul>
+
+    <div class="notice" role="note">
+      <p class="notice__title">敏感信息警示</p>
+      <p>
+        复制内容可能包含 <span class="policy__code">Authorization</span>、
+        <span class="policy__code">Cookie</span>、Token、密码等敏感信息。
+        请谨慎分享，或粘贴到第三方工具（包括各类 AI 服务）之前先确认内容安全，
+        并注意妥善保管剪贴板中的内容。
+      </p>
+    </div>
+
+    <h2>数据存放与生命周期</h2>
+    <p>
+      网络请求数据只保存在 DevTools 面板的<strong>内存</strong>中，用于在列表中展示与复制，
+      最多保留最近 1000 条。本扩展<strong>不写入磁盘，也不使用浏览器本地存储或数据库</strong>。
+    </p>
+    <p>
+      关闭 DevTools 后，面板上下文被销毁，这些数据随之<strong>立即消失且不可恢复</strong>。
+      重新打开 DevTools 时列表从空开始，不会恢复任何历史记录。
+    </p>
+
+    <h2>无服务器、无分析、无遥测、无广告</h2>
+    <ul>
+      <li>无自建或第三方服务器，无任何上传接口。</li>
+      <li>无统计数据、无行为分析、无遥测上报。</li>
+      <li>无广告、无推广、无外部追踪脚本。</li>
+    </ul>
+
+    <h2>权限说明</h2>
+    <p>
+      本扩展只申请一项权限：<span class="policy__code">clipboardWrite</span>（写入剪贴板），
+      用于复制你选中的请求文本。它<strong>不申请</strong>网络访问、主机访问、
+      标签页管理或后台运行等权限，因此在技术上也无法回传数据。
+    </p>
+
+    <h2>你的控制权</h2>
+    <p>
+      复制操作始终由你显式点击触发，扩展不会自动复制、不会在后台运行。
+      你可以选中并复制<strong>单条</strong>请求（默认且主要的使用方式）；
+      也可以按住 <span class="policy__code">Ctrl</span> /
+      <span class="policy__code">Cmd</span> /
+      <span class="policy__code">Shift</span> 多选请求，再点击「复制选中(N)」
+      一次复制<strong>多条</strong>请求。无论单条还是批量，都只在你主动点击时才会写入剪贴板。
+      你可以随时在浏览器的扩展管理页停用或移除本扩展。
+    </p>
+
+    <p class="policy__foot">
+      本扩展为本地工具，不处理账号、支付或任何个人身份信息。
+      如需了解功能用法，请参阅随附的使用说明文档。
+    </p>
+  </main>
+</body>
+</html>

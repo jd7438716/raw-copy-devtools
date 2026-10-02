@@ -1,0 +1,31 @@
+{
+  "slug": "缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢",
+  "overall": "heavy",
+  "rationale": "跨模块缺陷修复：捕获层异步语义（capture.js）+ store 数据结构扩展（原地回填/pending/字节预算）+ panel UI 竞态 + 编码分类 + 测试与文档；涉及 getContent 异步 API、内存预算（sec-audit R-01）、复制竞态等高风险面，overall=heavy。",
+  "task_count": 9,
+  "spec_ids_total": 35,
+  "tasks": {
+    "TASK-001": "standard",
+    "TASK-002": "heavy",
+    "TASK-003": "light",
+    "TASK-004": "standard",
+    "TASK-005": "standard",
+    "TASK-006": "standard",
+    "TASK-007": "standard",
+    "TASK-008": "light",
+    "TASK-009": "standard"
+  },
+  "task_weights_rationale": {
+    "TASK-001": "单文件但引入公共数据结构/事件语义与字节预算，standard。",
+    "TASK-002": "根因修复，异步 API 双形态 + 热路径 + 内存约束 + 并发，heavy。",
+    "TASK-003": "现有解码已完善，核验+最小适配，无新接口/迁移，light。",
+    "TASK-004": "UI 接线 + 复制竞态 await/超时 + 占位边界，standard。",
+    "TASK-005": "测试修正与新增，standard。",
+    "TASK-006": "专项测试（双形态/编码/保真/401/竞态），standard。",
+    "TASK-007": "store 专项测试，standard。",
+    "TASK-008": "纯文档边界修订，light。",
+    "TASK-009": "真机 E2E 字符级验证 + 全量回归确认，standard。"
+  },
+  "generated_by": "butler-task-decomposer",
+  "date": "2026-10-02"
+}

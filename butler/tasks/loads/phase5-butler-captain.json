@@ -1,0 +1,15 @@
+{
+  "step": "phase5-execute",
+  "agent": "butler-captain",
+  "slug": "新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto",
+  "loaded": [
+    "butler/CONSTITUTION.md",
+    "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/spec.md",
+    "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md",
+    "butler/plan/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/plan.md",
+    "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/TASK-001..016.md",
+    "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/dependency-graph.md"
+  ],
+  "missing": ["butler/learned/butler-captain.md"],
+  "date": "2026-10-02"
+}

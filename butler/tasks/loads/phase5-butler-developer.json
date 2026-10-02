@@ -1,0 +1,28 @@
+{
+  "step": "phase5",
+  "agent": "butler-developer",
+  "task": "TASK-013",
+  "slug": "新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto",
+  "loaded_at": "2026-10-02",
+  "context": {
+    "M": [
+      { "file": "butler/CONSTITUTION.md", "status": "ok" },
+      { "file": "butler/file-registry.md", "status": "ok" },
+      { "file": "butler/memory/corrections.md", "status": "ok" },
+      { "file": "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md", "status": "ok" },
+      { "file": "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/TASK-013.md", "status": "ok" }
+    ],
+    "O": [
+      { "file": "butler/project/overview.md", "status": "ok" },
+      { "file": "butler/learned/butler-developer.md", "status": "ok" },
+      { "file": "butler/domain/development.md", "status": "ok" },
+      { "file": "butler/domain/testing.md", "status": "skipped-not-read" }
+    ]
+  },
+  "frame": {
+    "path": "butler/memory/pair/{task-id}/frame/",
+    "status": "absent",
+    "note": "converge 追补 TASK，无 frame-builder 骨架，按 TASK 描述直接实现"
+  },
+  "missing_context": []
+}

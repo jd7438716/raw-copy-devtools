@@ -1,0 +1,46 @@
+{
+  "step": "TASK-004",
+  "agent": "butler-developer",
+  "task": "TASK-004",
+  "timestamp": "2026-10-02T10:40:00+08:00",
+  "slug": "新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/requirements/requirement.md (spec 目录副本)"
+    ],
+    "O": [
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/requirement.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/spec.json",
+      "butler/project/overview.md",
+      "butler/project/conventions.md",
+      "butler/domain/development.md",
+      "butler/domain/testing.md",
+      "butler/learned/butler-developer.md",
+      "extension/src/store.js",
+      "extension/src/capture.js",
+      "extension/src/i18n.js",
+      "extension/panel.js",
+      "extension/panel.html",
+      "extension/styles/panel.css",
+      "tests/store.test.mjs",
+      "tests/capture.test.mjs",
+      "scripts/check-syntax.mjs",
+      "scripts/check-panel-shell.mjs",
+      "scripts/check-zero-network.mjs",
+      "package.json"
+    ]
+  },
+  "frame": {
+    "path": "butler/memory/pair/TASK-004/frame/",
+    "status": "missing",
+    "note": "[MISSING_CONTEXT] 无 pair frame 产物（该 task 目录不存在）。任务描述已内联完整交付标准 + design.md §5.3 接口表为真源，按 backlog 直接实现。"
+  },
+  "missing": [
+    "butler/memory/pair/TASK-004/frame/ (frame-builder 产物，未生成；O 级，不阻塞)"
+  ],
+  "status": "ready"
+}

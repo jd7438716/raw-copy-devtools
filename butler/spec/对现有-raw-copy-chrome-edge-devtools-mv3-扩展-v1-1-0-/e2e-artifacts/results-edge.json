@@ -1,0 +1,385 @@
+{
+  "browser": "edge",
+  "exe": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+  "port": 9352,
+  "startedAt": "2026-10-02T08:52:43.670Z",
+  "checks": [
+    {
+      "key": "ENV",
+      "name": "mock chrome.devtools 桥接 + 真实 installCapture 注册监听",
+      "expected": "listeners === 1",
+      "actual": "listeners=1",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "ENV",
+      "name": "捕获→归一化→store→渲染 3 条记录",
+      "expected": "3 行，data-id=1/2/3",
+      "actual": "[{\"id\":\"3\",\"idx\":\"0\",\"url\":\"https://cdn.example.com/img.png\",\"status\":\"200\"},{\"id\":\"2\",\"idx\":\"1\",\"url\":\"https://api.example.com/users\",\"status\":\"404\"},{\"id\":\"1\",\"idx\":\"2\",\"url\":\"https://api.example.com/login\",\"status\":\"200\"}]",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "G-1a",
+      "name": "复制选中按钮 N=0：文案=复制选中(0)/Copy Selected (0)，无字面量 {count}，disabled=true",
+      "expected": "text 匹配 /^(复制选中|Copy Selected)\\(0\\)$/ 且 disabled=true 且不含 {count}",
+      "actual": "text='复制选中(0)', disabled=true",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "AC-001",
+      "name": "右键行 → 行被选中 + 面板内菜单弹出且含主项",
+      "expected": "menu.hidden=false 且含「复制请求 + 响应（原始）」；该行 is-selected",
+      "actual": "menu.hidden=false, items=[\"copy-request-response\"], row.cls='row is-selected', aria=true",
+      "pass": true,
+      "evidence": "{\"hidden\":false,\"left\":\"120px\",\"top\":\"160px\",\"items\":[{\"id\":\"copy-request-response\",\"action\":\"copyRequestResponse\",\"text\":\"复制请求 + 响应（原始）\",\"disabled\":false}]}"
+    },
+    {
+      "key": "G-1b",
+      "name": "复制选中按钮 N=1：文案=复制选中(1)，无字面量 {count}，disabled=false（使能）",
+      "expected": "text 匹配 /^(复制选中|Copy Selected)\\(1\\)$/ 且 disabled=false 且不含 {count}",
+      "actual": "text='复制选中(1)', disabled=false",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "AC-002",
+      "name": "模式 A：菜单主项剪贴板产物 === 底部 #copy-btn 产物（逐字符）",
+      "expected": "intended(menuA)===intended(btnA) 且双双等于冻结 formatter 期望；真实剪贴板（LF 规范化后）亦相等",
+      "actual": "menu===btn:true, OSclipboard(menu)===OSclipboard(btn):true, menuOsMatched:true, btnOsMatched:true, ===oracle:true",
+      "pass": true,
+      "evidence": "menuA=\"===== META =====\\n开始时间: 2026-10-02T10:00:00.000Z\\n总耗时: 123.4 ms\\n资源类型: xhr\\nMIME 类型:\"…"
+    },
+    {
+      "key": "AC-009b",
+      "name": "③ 分段复制移除：菜单无 P2 项、DOM 无 req/resp 按钮与 toggle；主项保留、A/B 按钮就位",
+      "expected": "p2MenuIds=[]；domReqBtn/domRespBtn/domToggle=false；hasMain=true；hasModeA/B=true 且 data-copy-mode=A/B",
+      "actual": "{\"p2MenuIds\":[],\"hasMain\":true,\"domReqBtn\":false,\"domRespBtn\":false,\"domToggle\":false,\"hasModeA\":true,\"hasModeB\":true,\"modeAValue\":\"A\",\"modeBValue\":\"B\"}",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "AC-008",
+      "name": "双击行 → #detail-pane 打开，六要素齐全且顺序正确",
+      "expected": "明细打开且 方法+URL/请求头/请求体/状态行/响应头/响应体 依次出现",
+      "actual": "hidden=false, order={\"reqLine\":119,\"reqH1\":161,\"reqH2\":192,\"reqBody\":225,\"reqBodyVal\":240,\"respLine\":293,\"respH1\":307,\"respH2\":338,\"respBody\":361,\"respBodyVal\":377}",
+      "pass": true,
+      "evidence": "detailText.length=398"
+    },
+    {
+      "key": "AC-009",
+      "name": "明细文本 === 冻结模式 A 产物；响应体逐字符原样；头保原序",
+      "expected": "detailText===oracle(A) 且以响应体原文结尾且头未重排",
+      "actual": "===oracle:true, endsWithBody:true, reqHeadersOrdered:true, respHeadersOrdered:true",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "AC-009b",
+      "name": "二进制（base64）响应明细复用 classifyBody：逐字符占位且不泄露原文",
+      "expected": "[Base64 content omitted: length 96] 且 ===oracle(A) 且不含 base64 原文",
+      "actual": "placeholder:true, noLeak:true, ===oracle:true",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "AC-010",
+      "name": "明细可关闭返回；单击仅选中不打开（仅双击打开）",
+      "expected": "关闭按钮/Esc/遮罩均隐藏抽屉；单击后 detail.hidden=true 且该行仍选中",
+      "actual": "closeBtn:true, singleClick(hidden=true, row2sel=true), escOpened:true/closed:true, backdropOpened:true/closed:true",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "AC-011",
+      "name": "明细内「复制请求+响应」按钮产物 === 主按钮产物，且复制后不关闭详情",
+      "expected": "detailCopy.intended === intendedA === btnA 且 detail 仍打开；真实剪贴板匹配",
+      "actual": "detailCopy===oracle:true, ===btnA:true, osMatched:true, norm===btnA:true, detailStillOpen:true",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "AC-008",
+      "name": "② 模式 A/B 独立按钮：点 B 产模式 B、点 A 产模式 A；与冻结 oracle 一致；无 toggle 残留",
+      "expected": "B===oracle(B)、A===oracle(A)、A≠B、#mode-toggle 不存在；真实剪贴板匹配",
+      "actual": "===oracleB:true, ===oracleA:true, A≠B:true, noToggle:true, osB:true, osA:true",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "G-1c",
+      "name": "复制选中按钮 N=3：文案=复制选中(3)，无字面量 {count}，disabled=false（使能）",
+      "expected": "text 匹配 /^(复制选中|Copy Selected)\\(3\\)$/ 且 disabled=false 且不含 {count}",
+      "actual": "text='复制选中(3)', disabled=false",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "MS",
+      "name": "多选工具栏：全选→计数→复制选中(N) 输出 N 段无混淆（补充 AC-005/006 实机抽查）",
+      "expected": "工具栏可见；全选后 count=3 且按钮启用；输出含 3 个 #i/3 标记且每段=单条产物",
+      "actual": "visible=true, count='已选 3 条', enabled=true, markers=3, blocksMatch=true",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "AC-013",
+      "name": "多选态右键命中集合内行 → 集合保留 + 菜单出现「复制选中(2)」→ 点击产出 2 段",
+      "expected": "countText 含 2；hasBatch=true 且 enabled；输出 2 个 #i/2 标记且含两条单条产物；真实剪贴板匹配",
+      "actual": "count='已选 2 条', hasBatch=true, batchText='复制选中(2)', disabled=false, markers=2, has1=true, has2=true, osMatched=true",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "AC-004",
+      "name": "混合修饰键：Ctrl 选集 + Ctrl+Shift 扩选 = 并集（id3 不丢、先前 Ctrl 项保留）",
+      "expected": "选中集合 size=3 且含 data-id 1/2/3",
+      "actual": "selected=[\"3\",\"2\",\"1\"]",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "AC-002a",
+      "name": "右键命中集合外行 → 集合坍缩为单选替换（该行）",
+      "expected": "选中集合 = {3}；count=1；菜单无批量项",
+      "actual": "{\"selected\":[\"3\"],\"batchPresent\":false,\"countText\":\"已选 1 条\"}",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "AC-002b",
+      "name": "右键命中集合内行 → 集合保留（不坍缩）",
+      "expected": "选中集合仍为 {1,2}；菜单出现「复制选中(2)」",
+      "actual": "{\"selected\":[\"1\",\"2\"],\"batchPresent\":true,\"batchText\":\"复制选中(2)\"}",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "AC-003",
+      "name": "工具栏批量与右键批量对同一集合产物逐字符一致",
+      "expected": "intended 完全相等；含 2 个 #i/2 标记",
+      "actual": "ctx===toolbar:true, markers=2, osCtx=true, osToolbar=true",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "AC-009c",
+      "name": "非 base64 图片正文 → 明细 [Binary content omitted] 逐字符占位",
+      "expected": "包含 [Binary content omitted: image/png, 2048 bytes] 且 ===oracle(A)",
+      "actual": "domMax=4, id=4, open:true, contains:true, ===oracle:true",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "EDGE",
+      "name": "边界：表头/空白不弹；Esc/点击他处/滚动/失焦关闭菜单",
+      "expected": "header/blank 保持 hidden=true；四种关闭触发后 hidden=true",
+      "actual": "{\"headerNoMenu\":true,\"blankNoMenu\":true,\"escCloses\":{\"opened\":true,\"closed\":true},\"otherClickCloses\":true,\"scrollCloses\":true,\"blurCloses\":true}",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "EDGE",
+      "name": "边界：明细记录被淘汰 → 自动关闭 + 提示 detail.evicted",
+      "expected": "specialId=5 打开后灌 1000 条淘汰之 → detail.hidden=true 且 toast=该请求已被淘汰，明细已关闭",
+      "actual": "{\"detailHidden\":true,\"toast\":\"该请求已被淘汰，明细已关闭\"}",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "key": "CONSOLE",
+      "name": "控制台零错误 / 零 CSP 违规（采集链自证）",
+      "expected": "probe 被采集 且 errors=0 且 csp=0",
+      "actual": "probeCaptured=true, errors=0, csp=0, consoleMessages=1",
+      "pass": true,
+      "evidence": "{\"errs\":[],\"csp\":[]}"
+    },
+    {
+      "key": "DEL-001",
+      "name": "devtools_page 注册面板 spy：panels.create(Raw Copy, panel.html)",
+      "expected": "title=Raw Copy, page=panel.html",
+      "actual": "{\"title\":\"Raw Copy\",\"icon\":\"icons/icon32.png\",\"page\":\"panel.html\"}",
+      "pass": true,
+      "evidence": ""
+    }
+  ],
+  "console": [
+    {
+      "type": "info",
+      "text": "[E2E-CONSOLE-PROBE]"
+    }
+  ],
+  "errors": [],
+  "shots": [
+    {
+      "name": "E2E-g1-n0-edge.png",
+      "bytes": 52325
+    },
+    {
+      "name": "E2E-ctx-menu-edge.png",
+      "bytes": 57073
+    },
+    {
+      "name": "E2E-detail-edge.png",
+      "bytes": 75857
+    },
+    {
+      "name": "E2E-multiselect-edge.png",
+      "bytes": 51879
+    }
+  ],
+  "clipboardSamples": [
+    {
+      "label": "AC-002 menu mode A",
+      "intended": "===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osText": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "osFile": "===== META =====\r\n开始时间: 2026-10-02T10:00:00.000Z\r\n总耗时: 123.4 ms\r\n资源类型: xhr\r\nMIME 类型: application/json\r\n\r\n===== REQUEST =====\r\nPOST https://api.example.com/login HTTP/2\r\nContent-Type: application/json\r\nAuthorization: Bearer token-123\r\n\r\n[Request Body]\r\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\r\n\r\n===== RESPONSE =====\r\nHTTP/2 200 OK\r\nContent-Type: application/json\r\nX-Trace-Id: trace-abc\r\n\r\n[Response Body]\r\n{\"code\":0,\"msg\":\"ok\"}",
+      "norm": "===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osMatched": true,
+      "readNorm": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "readTextMatched": false,
+      "toast": {
+        "text": "已复制到剪贴板",
+        "cls": "toast toast--success",
+        "vis": "false"
+      }
+    },
+    {
+      "label": "AC-002 button mode A",
+      "intended": "===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osText": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "osFile": "===== META =====\r\n开始时间: 2026-10-02T10:00:00.000Z\r\n总耗时: 123.4 ms\r\n资源类型: xhr\r\nMIME 类型: application/json\r\n\r\n===== REQUEST =====\r\nPOST https://api.example.com/login HTTP/2\r\nContent-Type: application/json\r\nAuthorization: Bearer token-123\r\n\r\n[Request Body]\r\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\r\n\r\n===== RESPONSE =====\r\nHTTP/2 200 OK\r\nContent-Type: application/json\r\nX-Trace-Id: trace-abc\r\n\r\n[Response Body]\r\n{\"code\":0,\"msg\":\"ok\"}",
+      "norm": "===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osMatched": true,
+      "readNorm": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "readTextMatched": false,
+      "toast": {
+        "text": "已复制到剪贴板",
+        "cls": "toast toast--success",
+        "vis": "false"
+      }
+    },
+    {
+      "label": "AC-011 detail copy",
+      "intended": "===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osText": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "osFile": "===== META =====\r\n开始时间: 2026-10-02T10:00:00.000Z\r\n总耗时: 123.4 ms\r\n资源类型: xhr\r\nMIME 类型: application/json\r\n\r\n===== REQUEST =====\r\nPOST https://api.example.com/login HTTP/2\r\nContent-Type: application/json\r\nAuthorization: Bearer token-123\r\n\r\n[Request Body]\r\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\r\n\r\n===== RESPONSE =====\r\nHTTP/2 200 OK\r\nContent-Type: application/json\r\nX-Trace-Id: trace-abc\r\n\r\n[Response Body]\r\n{\"code\":0,\"msg\":\"ok\"}",
+      "norm": "===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osMatched": true,
+      "readNorm": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "readTextMatched": false,
+      "toast": {
+        "text": "已复制到剪贴板",
+        "cls": "toast toast--success",
+        "vis": "false"
+      }
+    },
+    {
+      "label": "AC-008 button mode B",
+      "intended": "POST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n{\"code\":0,\"msg\":\"ok\"}",
+      "osText": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "osFile": "POST https://api.example.com/login HTTP/2\r\nContent-Type: application/json\r\nAuthorization: Bearer token-123\r\n\r\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\r\n\r\nHTTP/2 200 OK\r\nContent-Type: application/json\r\nX-Trace-Id: trace-abc\r\n\r\n{\"code\":0,\"msg\":\"ok\"}",
+      "norm": "POST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n{\"code\":0,\"msg\":\"ok\"}",
+      "osMatched": true,
+      "readNorm": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "readTextMatched": false,
+      "toast": {
+        "text": "已复制到剪贴板",
+        "cls": "toast toast--success",
+        "vis": "false"
+      }
+    },
+    {
+      "label": "AC-008 button mode A",
+      "intended": "===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osText": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "osFile": "===== META =====\r\n开始时间: 2026-10-02T10:00:00.000Z\r\n总耗时: 123.4 ms\r\n资源类型: xhr\r\nMIME 类型: application/json\r\n\r\n===== REQUEST =====\r\nPOST https://api.example.com/login HTTP/2\r\nContent-Type: application/json\r\nAuthorization: Bearer token-123\r\n\r\n[Request Body]\r\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\r\n\r\n===== RESPONSE =====\r\nHTTP/2 200 OK\r\nContent-Type: application/json\r\nX-Trace-Id: trace-abc\r\n\r\n[Response Body]\r\n{\"code\":0,\"msg\":\"ok\"}",
+      "norm": "===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osMatched": true,
+      "readNorm": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "readTextMatched": false,
+      "toast": {
+        "text": "已复制到剪贴板",
+        "cls": "toast toast--success",
+        "vis": "false"
+      }
+    },
+    {
+      "label": "bulk copy 3",
+      "intended": "===== #1/3 =====\n===== META =====\n开始时间: 2026-10-02T10:00:02.000Z\n总耗时: 88 ms\n资源类型: Other\nMIME 类型: image/png\n\n===== REQUEST =====\nGET https://cdn.example.com/img.png HTTP/2\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: image/png\n\n[Response Body]\n[Base64 content omitted: length 96]\n\n===== #2/3 =====\n===== META =====\n开始时间: 2026-10-02T10:00:01.000Z\n总耗时: 42.1 ms\n资源类型: fetch\nMIME 类型: text/html\n\n===== REQUEST =====\nGET https://api.example.com/users HTTP/1.1\nAccept: text/html\n\n===== RESPONSE =====\nHTTP/1.1 404 Not Found\nContent-Type: text/html\n\n[Response Body]\nnot found\n\n===== #3/3 =====\n===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osText": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "osFile": "===== #1/3 =====\r\n===== META =====\r\n开始时间: 2026-10-02T10:00:02.000Z\r\n总耗时: 88 ms\r\n资源类型: Other\r\nMIME 类型: image/png\r\n\r\n===== REQUEST =====\r\nGET https://cdn.example.com/img.png HTTP/2\r\n\r\n===== RESPONSE =====\r\nHTTP/2 200 OK\r\nContent-Type: image/png\r\n\r\n[Response Body]\r\n[Base64 content omitted: length 96]\r\n\r\n===== #2/3 =====\r\n===== META =====\r\n开始时间: 2026-10-02T10:00:01.000Z\r\n总耗时: 42.1 ms\r\n资源类型: fetch\r\nMIME 类型: text/html\r\n\r\n===== REQUEST =====\r\nGET https://api.example.com/users HTTP/1.1\r\nAccept: text/html\r\n\r\n===== RESPONSE =====\r\nHTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\n\r\n[Response Body]\r\nnot found\r\n\r\n===== #3/3 =====\r\n===== META =====\r\n开始时间: 2026-10-02T10:00:00.000Z\r\n总耗时: 123.4 ms\r\n资源类型: xhr\r\nMIME 类型: application/json\r\n\r\n===== REQUEST =====\r\nPOST https://api.example.com/login HTTP/2\r\nContent-Type: application/json\r\nAuthorization: Bearer token-123\r\n\r\n[Request Body]\r\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\r\n\r\n===== RESPONSE =====\r\nHTTP/2 200 OK\r\nContent-Type: application/json\r\nX-Trace-Id: trace-abc\r\n\r\n[Response Body]\r\n{\"code\":0,\"msg\":\"ok\"}",
+      "norm": "===== #1/3 =====\n===== META =====\n开始时间: 2026-10-02T10:00:02.000Z\n总耗时: 88 ms\n资源类型: Other\nMIME 类型: image/png\n\n===== REQUEST =====\nGET https://cdn.example.com/img.png HTTP/2\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: image/png\n\n[Response Body]\n[Base64 content omitted: length 96]\n\n===== #2/3 =====\n===== META =====\n开始时间: 2026-10-02T10:00:01.000Z\n总耗时: 42.1 ms\n资源类型: fetch\nMIME 类型: text/html\n\n===== REQUEST =====\nGET https://api.example.com/users HTTP/1.1\nAccept: text/html\n\n===== RESPONSE =====\nHTTP/1.1 404 Not Found\nContent-Type: text/html\n\n[Response Body]\nnot found\n\n===== #3/3 =====\n===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osMatched": true,
+      "readNorm": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "readTextMatched": false,
+      "toast": {
+        "text": "已复制到剪贴板",
+        "cls": "toast toast--success",
+        "vis": "false"
+      }
+    },
+    {
+      "label": "AC-013 ctx batch 2",
+      "intended": "===== #1/2 =====\n===== META =====\n开始时间: 2026-10-02T10:00:01.000Z\n总耗时: 42.1 ms\n资源类型: fetch\nMIME 类型: text/html\n\n===== REQUEST =====\nGET https://api.example.com/users HTTP/1.1\nAccept: text/html\n\n===== RESPONSE =====\nHTTP/1.1 404 Not Found\nContent-Type: text/html\n\n[Response Body]\nnot found\n\n===== #2/2 =====\n===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osText": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "osFile": "===== #1/2 =====\r\n===== META =====\r\n开始时间: 2026-10-02T10:00:01.000Z\r\n总耗时: 42.1 ms\r\n资源类型: fetch\r\nMIME 类型: text/html\r\n\r\n===== REQUEST =====\r\nGET https://api.example.com/users HTTP/1.1\r\nAccept: text/html\r\n\r\n===== RESPONSE =====\r\nHTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\n\r\n[Response Body]\r\nnot found\r\n\r\n===== #2/2 =====\r\n===== META =====\r\n开始时间: 2026-10-02T10:00:00.000Z\r\n总耗时: 123.4 ms\r\n资源类型: xhr\r\nMIME 类型: application/json\r\n\r\n===== REQUEST =====\r\nPOST https://api.example.com/login HTTP/2\r\nContent-Type: application/json\r\nAuthorization: Bearer token-123\r\n\r\n[Request Body]\r\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\r\n\r\n===== RESPONSE =====\r\nHTTP/2 200 OK\r\nContent-Type: application/json\r\nX-Trace-Id: trace-abc\r\n\r\n[Response Body]\r\n{\"code\":0,\"msg\":\"ok\"}",
+      "norm": "===== #1/2 =====\n===== META =====\n开始时间: 2026-10-02T10:00:01.000Z\n总耗时: 42.1 ms\n资源类型: fetch\nMIME 类型: text/html\n\n===== REQUEST =====\nGET https://api.example.com/users HTTP/1.1\nAccept: text/html\n\n===== RESPONSE =====\nHTTP/1.1 404 Not Found\nContent-Type: text/html\n\n[Response Body]\nnot found\n\n===== #2/2 =====\n===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osMatched": true,
+      "readNorm": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "readTextMatched": false,
+      "toast": {
+        "text": "已复制到剪贴板",
+        "cls": "toast toast--success",
+        "vis": "false"
+      }
+    },
+    {
+      "label": "AC-003 ctx batch",
+      "intended": "===== #1/2 =====\n===== META =====\n开始时间: 2026-10-02T10:00:01.000Z\n总耗时: 42.1 ms\n资源类型: fetch\nMIME 类型: text/html\n\n===== REQUEST =====\nGET https://api.example.com/users HTTP/1.1\nAccept: text/html\n\n===== RESPONSE =====\nHTTP/1.1 404 Not Found\nContent-Type: text/html\n\n[Response Body]\nnot found\n\n===== #2/2 =====\n===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osText": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "osFile": "===== #1/2 =====\r\n===== META =====\r\n开始时间: 2026-10-02T10:00:01.000Z\r\n总耗时: 42.1 ms\r\n资源类型: fetch\r\nMIME 类型: text/html\r\n\r\n===== REQUEST =====\r\nGET https://api.example.com/users HTTP/1.1\r\nAccept: text/html\r\n\r\n===== RESPONSE =====\r\nHTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\n\r\n[Response Body]\r\nnot found\r\n\r\n===== #2/2 =====\r\n===== META =====\r\n开始时间: 2026-10-02T10:00:00.000Z\r\n总耗时: 123.4 ms\r\n资源类型: xhr\r\nMIME 类型: application/json\r\n\r\n===== REQUEST =====\r\nPOST https://api.example.com/login HTTP/2\r\nContent-Type: application/json\r\nAuthorization: Bearer token-123\r\n\r\n[Request Body]\r\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\r\n\r\n===== RESPONSE =====\r\nHTTP/2 200 OK\r\nContent-Type: application/json\r\nX-Trace-Id: trace-abc\r\n\r\n[Response Body]\r\n{\"code\":0,\"msg\":\"ok\"}",
+      "norm": "===== #1/2 =====\n===== META =====\n开始时间: 2026-10-02T10:00:01.000Z\n总耗时: 42.1 ms\n资源类型: fetch\nMIME 类型: text/html\n\n===== REQUEST =====\nGET https://api.example.com/users HTTP/1.1\nAccept: text/html\n\n===== RESPONSE =====\nHTTP/1.1 404 Not Found\nContent-Type: text/html\n\n[Response Body]\nnot found\n\n===== #2/2 =====\n===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osMatched": true,
+      "readNorm": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "readTextMatched": false,
+      "toast": {
+        "text": "已复制到剪贴板",
+        "cls": "toast toast--success",
+        "vis": "false"
+      }
+    },
+    {
+      "label": "AC-003 toolbar batch",
+      "intended": "===== #1/2 =====\n===== META =====\n开始时间: 2026-10-02T10:00:01.000Z\n总耗时: 42.1 ms\n资源类型: fetch\nMIME 类型: text/html\n\n===== REQUEST =====\nGET https://api.example.com/users HTTP/1.1\nAccept: text/html\n\n===== RESPONSE =====\nHTTP/1.1 404 Not Found\nContent-Type: text/html\n\n[Response Body]\nnot found\n\n===== #2/2 =====\n===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osText": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "osFile": "===== #1/2 =====\r\n===== META =====\r\n开始时间: 2026-10-02T10:00:01.000Z\r\n总耗时: 42.1 ms\r\n资源类型: fetch\r\nMIME 类型: text/html\r\n\r\n===== REQUEST =====\r\nGET https://api.example.com/users HTTP/1.1\r\nAccept: text/html\r\n\r\n===== RESPONSE =====\r\nHTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\n\r\n[Response Body]\r\nnot found\r\n\r\n===== #2/2 =====\r\n===== META =====\r\n开始时间: 2026-10-02T10:00:00.000Z\r\n总耗时: 123.4 ms\r\n资源类型: xhr\r\nMIME 类型: application/json\r\n\r\n===== REQUEST =====\r\nPOST https://api.example.com/login HTTP/2\r\nContent-Type: application/json\r\nAuthorization: Bearer token-123\r\n\r\n[Request Body]\r\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\r\n\r\n===== RESPONSE =====\r\nHTTP/2 200 OK\r\nContent-Type: application/json\r\nX-Trace-Id: trace-abc\r\n\r\n[Response Body]\r\n{\"code\":0,\"msg\":\"ok\"}",
+      "norm": "===== #1/2 =====\n===== META =====\n开始时间: 2026-10-02T10:00:01.000Z\n总耗时: 42.1 ms\n资源类型: fetch\nMIME 类型: text/html\n\n===== REQUEST =====\nGET https://api.example.com/users HTTP/1.1\nAccept: text/html\n\n===== RESPONSE =====\nHTTP/1.1 404 Not Found\nContent-Type: text/html\n\n[Response Body]\nnot found\n\n===== #2/2 =====\n===== META =====\n开始时间: 2026-10-02T10:00:00.000Z\n总耗时: 123.4 ms\n资源类型: xhr\nMIME 类型: application/json\n\n===== REQUEST =====\nPOST https://api.example.com/login HTTP/2\nContent-Type: application/json\nAuthorization: Bearer token-123\n\n[Request Body]\n{\"user\":\"alice\",\"pw\":\"s3cret\"}\n\n===== RESPONSE =====\nHTTP/2 200 OK\nContent-Type: application/json\nX-Trace-Id: trace-abc\n\n[Response Body]\n{\"code\":0,\"msg\":\"ok\"}",
+      "osMatched": true,
+      "readNorm": "__READERR__:Failed to execute 'readText' on 'Clipboard': Document is not focused.",
+      "readTextMatched": false,
+      "toast": {
+        "text": "已复制到剪贴板",
+        "cls": "toast toast--success",
+        "vis": "false"
+      }
+    }
+  ],
+  "env": {
+    "browserVersion": "Edg/154.0.4258.48",
+    "extensionId": "iieicollgmbkdpmcnljkjdfndkbmdagk",
+    "panelReady": true,
+    "mock": {
+      "ok": true,
+      "err": null,
+      "listeners": 1
+    },
+    "consoleProbeCaptured": true
+  },
+  "targetId": "0B15CA20BE10C649615B5076FE637EAC",
+  "consoleCount": 1,
+  "errorCount": 0,
+  "finishedAt": "2026-10-02T08:53:40.126Z"
+}

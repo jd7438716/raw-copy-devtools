@@ -1,0 +1,14 @@
+{
+  "project": "raw-copy-devtools",
+  "slug": "raw-copy-devtools",
+  "name": "Chrome DevTools 单条请求原始信息一键复制扩展",
+  "version": "1.0.0",
+  "description": "Manifest V3 DevTools 扩展：一键复制单条网络请求的完整请求+响应原始信息为纯文本（不美化 JSON），供 AI 分析。零第三方依赖，不发起网络请求，最小权限。",
+  "requirement_source": "req.txt",
+  "language": "JavaScript",
+  "framework": "Chrome Extension / DevTools (Manifest V3)",
+  "build": "",
+  "test": "echo 'WARN: no test configured'",
+  "lint": "echo 'WARN: no lint configured'",
+  "project_root": "."
+}

@@ -1,0 +1,31 @@
+{
+  "step": "rework-01",
+  "agent": "butler-developer",
+  "slug": "TASK-011-TASK-012-rework-体积门禁失败",
+  "scope": "changed",
+  "ts": "2026-10-02",
+  "loaded": [
+    "butler/CONSTITUTION.md",
+    "butler/file-registry.md",
+    "butler/memory/corrections.md",
+    "butler/project/overview.md",
+    "butler/domain/development.md",
+    "butler/domain/testing.md",
+    "butler/conventions.md",
+    "butler/learned/butler-developer.md",
+    "scripts/package.mjs",
+    "scripts/check-syntax.mjs",
+    "req.txt (§9 体积 < 200KB)",
+    "extension/**/*.js (15 files, 诊断+剥离安全前提验证)"
+  ],
+  "missing_optional": [
+    "butler/memory/ai-orchestration.json",
+    "butler/memory/pair/TASK-011/round-01/reviewer-feedback.md (首次 rework，无反馈)"
+  ],
+  "dynamic_audits": [
+    "基线 node --test 264/264 PASS",
+    "基线 node scripts/package.mjs FAIL (236655 B >= 204800 B)",
+    "剥离安全前提机械验证: 全部反引号位于注释内 (0 个代码行含反引号), 无多行模板字符串",
+    "所有 .js UTF-8 round-trip 有效"
+  ]
+}

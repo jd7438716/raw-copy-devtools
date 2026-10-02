@@ -1,0 +1,32 @@
+{
+  "step": "developer-TASK-009",
+  "agent": "butler-developer",
+  "timestamp": "2026-10-02",
+  "task": "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-009.md",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/design.md (§4.2/§4.3, ADR-014/017/018/020)",
+      "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-009.md"
+    ],
+    "O": [
+      "extension/panel.js",
+      "extension/panel.html",
+      "extension/src/detail.js",
+      "extension/src/contextmenu.js",
+      "extension/src/multiselection.js",
+      "extension/src/store.js",
+      "extension/src/i18n.js",
+      "extension/src/capture.js",
+      "extension/styles/panel.css",
+      "scripts/check-syntax.mjs",
+      "scripts/check-panel-shell.mjs",
+      "scripts/check-zero-network.mjs",
+      "tests/detail.test.mjs",
+      "tests/i18n.test.mjs"
+    ]
+  },
+  "missing_context": []
+}

@@ -1,0 +1,40 @@
+{
+  "step": "converge",
+  "agent": "butler-doc-writer",
+  "task": "TASK-010",
+  "timestamp": "2026-10-02T00:00:00+08:00",
+  "slug": "新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md",
+      "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/TASK-010.md"
+    ],
+    "O": [
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/requirement.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/checklist.md",
+      "butler/plan/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/plan.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/stories-written.md",
+      "butler/project/overview.md",
+      "butler/domain/development.md",
+      "extension/manifest.json",
+      "extension/devtools.js",
+      "extension/panel.html",
+      "extension/panel.js",
+      "extension/src/i18n.js",
+      "tests/README.md"
+    ],
+    "missing": [
+      "butler/learned/butler-doc-writer.md (首次运行，无历史记录)"
+    ]
+  },
+  "path_decision": {
+    "task_says": "仓库根 INSTALL.md / USAGE.md（TASK-010 §交付物）",
+    "design_says": "docs/INSTALL.md / docs/USAGE.md（design.md §1.2 L62-63, plan.md L2802/2806）",
+    "resolution": "以 TASK-010 显式指令为准在仓库根产出；同时镜像到 design 真源的 docs/ 路径，双路径均满足 AC-019 存在性判据。"
+  },
+  "status": "ready",
+  "notes": "TASK-010 depends-on TASK-002；panel 外壳 + i18n 已存在（extension/panel.*, src/i18n.js）。capture/filter/selection/formatter/clipboard/content 等模块尚未落地，本文档按 design.md（冻结契约）描述产品行为，可选按钮（REQ-013/DEC-004）显式标注 P2。"
+}

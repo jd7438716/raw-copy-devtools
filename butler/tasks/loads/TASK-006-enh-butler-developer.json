@@ -1,0 +1,45 @@
+{
+  "step": "TASK-006",
+  "agent": "butler-developer",
+  "task": "TASK-006",
+  "milestone": "enhancement",
+  "slug": "在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增",
+  "timestamp": "2026-10-02T00:00:00+08:00",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md"
+    ],
+    "O": [
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/requirement.md",
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/design.md",
+      "butler/plan/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/plan.md",
+      "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-006.md",
+      "butler/project/overview.md",
+      "butler/learned/butler-developer.md",
+      "butler/domain/development.md",
+      "butler/domain/testing.md",
+      "extension/src/render.js",
+      "extension/src/bulkformatter.js",
+      "extension/src/formatter.js",
+      "extension/src/multiselection.js",
+      "extension/src/i18n.js",
+      "extension/panel.js",
+      "extension/panel.html",
+      "tests/bulkformatter.test.mjs",
+      "scripts/check-syntax.mjs",
+      "scripts/check-zero-network.mjs",
+      "package.json"
+    ]
+  },
+  "frame": {
+    "path": "butler/memory/pair/TASK-006-enh/frame/",
+    "status": "missing",
+    "note": "[MISSING_CONTEXT] 无 pair frame 骨架产物；任务描述 + design.md §4.2/ADR-013 + plan STORY-ENH-001 已内联完整接口契约与验收，按 backlog 直接实现（O 级，不阻塞）。"
+  },
+  "missing": [
+    "butler/requirements/requirement.md (registry F-40 路径为空；真源实际在 butler/spec/{slug}/requirement.md，已加载)",
+    "butler/memory/pair/TASK-006-enh/frame/ (frame-builder 产物缺失，O 级)"
+  ]
+}

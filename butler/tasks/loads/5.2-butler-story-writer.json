@@ -1,0 +1,31 @@
+{
+  "step": "5.2",
+  "agent": "butler-story-writer",
+  "timestamp": "2026-10-02T10:20:00+08:00",
+  "slug": "新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/file-registry.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/spec.json",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/requirement.md"
+    ],
+    "O": [
+      "butler/project/overview.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/feasibility.md",
+      "butler/learned/story-writer.md",
+      ".opencode/skills/butler-user-stories/SKILL.md"
+    ],
+    "missing": [
+      "butler/memory/corrections.md (首次运行无历史纠错)"
+    ]
+  },
+  "upstream": [
+    "design.md",
+    "spec.json",
+    "requirement.md",
+    "feasibility.md"
+  ],
+  "status": "ready"
+}

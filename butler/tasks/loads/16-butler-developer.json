@@ -1,0 +1,26 @@
+{
+  "step": "16",
+  "agent": "butler-developer",
+  "task": "TASK-016",
+  "timestamp": "2026-10-02T10:05:00Z",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/requirements/requirement.md (spec via design.md)"
+    ],
+    "O": [
+      "butler/project/overview.md",
+      "butler/project/conventions.md",
+      "butler/domain/development.md",
+      "butler/domain/testing.md",
+      "butler/learned/butler-developer.md",
+      "butler/conventions.md",
+      "req.txt",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md"
+    ]
+  },
+  "missing": [],
+  "status": "ready"
+}

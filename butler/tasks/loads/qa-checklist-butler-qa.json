@@ -1,0 +1,30 @@
+{
+  "step": "qa-requirements-checklist",
+  "agent": "butler-qa",
+  "task": "生成需求质量清单 checklist.md（读 spec.json + 02-solution-design.md）",
+  "date": "2026-10-02",
+  "loaded": {
+    "M": [
+      "butler/file-registry.md",
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/requirements/requirement.md"
+    ],
+    "O": [
+      "butler/project/overview.md",
+      "butler/learned/butler-qa.md",
+      "butler/memory/qa-strategy.md",
+      "butler/domain/testing.md"
+    ],
+    "task_inputs": [
+      "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/spec.json",
+      "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/02-solution-design.md"
+    ]
+  },
+  "missing_context": [],
+  "produces": [
+    "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/checklist.md"
+  ],
+  "code_changed": false,
+  "dag_started": false
+}

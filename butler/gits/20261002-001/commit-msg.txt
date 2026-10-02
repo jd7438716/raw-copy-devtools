@@ -1,0 +1,7 @@
+feat: 首次提交 Raw Copy v1.1.0（MV3 DevTools 扩展）
+
+- 初始化 Git 仓库（master），纳入源码/测试/文档/打包脚本与发行 ZIP
+- 核心能力：单条/多选请求「完整请求+响应」原始纯文本复制（不美化 JSON）
+- 右键菜单复制、双击明细查看、响应体异步 getContent 保真修复
+- 最小权限（仅 clipboardWrite）、零第三方依赖、不发起网络请求
+- 测试 283 例；新增根 .gitignore 忽略 node_modules/OS 垃圾/临时验证目录/.refs

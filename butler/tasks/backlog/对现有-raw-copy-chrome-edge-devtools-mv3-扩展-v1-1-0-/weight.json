@@ -1,0 +1,40 @@
+{
+  "slug": "对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-",
+  "overall": "heavy",
+  "rationale": "跨模块（panel.js 编排 + multiselection.js 新增 additive 接口 + contextmenu.js 模型收窄 + panel.html/css/i18n + 5 类测试/门禁/文档/发行）；引入内部 ESM 新接口契约（extendTo）并变更 openContextMenu 契约；安全相关（仅 clipboardWrite / 零网络 / 零依赖 / 体积门禁）；无 DB。按判据满足『跨模块 + 新接口契约 + 安全相关 + 高不确定性（入口语义变更）』→ heavy。",
+  "tasks": {
+    "TASK-001": "heavy",
+    "TASK-002": "standard",
+    "TASK-003": "heavy",
+    "TASK-004": "heavy",
+    "TASK-005": "light",
+    "TASK-006": "light",
+    "TASK-007": "standard",
+    "TASK-008": "standard",
+    "TASK-009": "standard",
+    "TASK-010": "standard",
+    "TASK-011": "light",
+    "TASK-012": "light",
+    "TASK-013": "light",
+    "TASK-014": "light",
+    "TASK-015": "heavy",
+    "TASK-016": "heavy"
+  },
+  "notes": {
+    "TASK-001": "选中语义核心 + 新增 additive 接口；必须回归 rangeTo 替换语义不倒退",
+    "TASK-002": "纯函数模型收窄，签名变更影响所有调用点/形状断言",
+    "TASK-003": "入口语义切换点，改变既有右键交互；release 阻塞",
+    "TASK-004": "验证须真实走 onContextMenu（防止纯模型自欺）",
+    "TASK-005": "纯结构/样式，无逻辑，宜 light",
+    "TASK-006": "字典键增删 + zh/en 对齐，宜 light",
+    "TASK-007": "删除可变模块状态，漏改读取点会 undefined；non-A→A 兜底",
+    "TASK-008": "删除跨段共享逻辑，须防孤儿/悬空引用",
+    "TASK-015": "安全相关（权限/零依赖/体积门禁真源），发行阻塞",
+    "TASK-016": "全量回归 + 约束门禁，highest-stakes 验证；门禁未过不得打包"
+  },
+  "intensity": {
+    "light": "只跑 lint + 与改动相关的单测（不跑全量 test）；安全只做快速规则扫描",
+    "standard": "build + test 全量 + sec-scan",
+    "heavy": "standard + 独立回归（必要时设计评审）"
+  }
+}

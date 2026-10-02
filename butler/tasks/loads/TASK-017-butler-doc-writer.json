@@ -1,0 +1,42 @@
+{
+  "step": "TASK-017-butler-doc-writer",
+  "agent": "butler-doc-writer",
+  "timestamp": "2026-10-02",
+  "task": "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-017.md",
+  "slug": "在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增",
+  "loaded": {
+    "M": [
+      "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-017.md",
+      "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-014.md",
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/requirement.md（REQ-024 / AC-017 / 非目标覆盖声明）",
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/design.md（ADR-013/014/015/017，DEL-008）",
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/e2e-report.md（TASK-016 实机结果）",
+      "butler/file-registry.md（§2 通用基线 / §3 加载清单）",
+      "butler/CONSTITUTION.md（基线）",
+      "butler/memory/corrections.md（基线）"
+    ],
+    "O": [
+      "butler/project/overview.md",
+      "butler/learned/butler-doc-writer.md",
+      "butler/memory/documentation.md",
+      "butler/domain/development.md",
+      "docs/USAGE.md / docs/INSTALL.md（既有 11 节结构）",
+      "USAGE.md / INSTALL.md（仓库根镜像）",
+      "extension/manifest.json（version=1.1.0，permissions=[clipboardWrite]）",
+      "extension/panel.html / extension/panel.js / extension/src/i18n.js（实现核对：右键菜单/多选/详情文案与行为）",
+      "butler/tasks/loads/TASK-008-butler-doc-writer.json（日志格式参照）"
+    ]
+  },
+  "code_consistency_check": {
+    "manifest.json": "version=1.1.0；permissions 仅 [\"clipboardWrite\"]（AC-012）——与文档版本 bump / 权限复核一致",
+    "panel.js:848-856": "updateMultiToolbar 对 #copy-selected-btn 以 t('multi.copySelected',{count}) 插值，按钮实时显示「复制选中(N)」——与 USAGE 第 7 节一致（G-1 已不再复现）",
+    "panel.js:783-811": "行点击 Shift→rangeTo / Ctrl|Cmd→toggleAt / 无修饰→selectAt；↑↓→move 清空集合回落单选（ADR-014）——与 USAGE 第 7 节一致",
+    "panel.js:1190-1195,1652-1735": "contextmenu 委托 + 自绘菜单（零权限）；dblclick→openDetailRecord——与 USAGE 第 6/8 节一致",
+    "bulkformatter.js:100": "buildBulkCopyText；N≥2 加 ===== #i/N ===== 标记，N=1 委托单选（ADR-015）——与 USAGE 第 7 节输出结构一致"
+  },
+  "mirrors": {
+    "docs/USAGE.md": "USAGE.md（逐字节一致，cmp 通过）",
+    "docs/INSTALL.md": "INSTALL.md（逐字节一致，cmp 通过）"
+  },
+  "missing_context": []
+}

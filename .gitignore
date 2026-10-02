@@ -1,0 +1,18 @@
+# === Dependencies ===
+node_modules/
+
+# === OS junk ===
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+._*
+
+# === Temp / verification output (produced by scripts/package.mjs) ===
+dist/_unzip/
+dist/_verify/
+
+# === External junctions (never commit external targets; see butler/refs.md) ===
+.refs/
+
+# NOTE: dist/*.zip are release artifacts and MUST be kept.

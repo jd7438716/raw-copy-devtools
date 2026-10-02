@@ -1,0 +1,29 @@
+{
+  "step": "fix",
+  "agent": "butler-rf-fixer",
+  "slug": "对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-",
+  "session": "ses_f0435a51affeU7bTAqjhZRILkg",
+  "date": "2026-10-02",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/requirements/requirement.md (as referenced)",
+      "butler/tasks/backlog/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/TASK-001..016.md",
+      "butler/tasks/backlog/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/dependency-graph.md"
+    ],
+    "O": [
+      "butler/project/overview.md",
+      "butler/learned/butler-rf-fixer.md",
+      "butler/domain/development.md",
+      "butler/domain/testing.md",
+      "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/01-root-cause.md",
+      "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/02-solution-design.md",
+      "butler/memory/fix-report.md"
+    ]
+  },
+  "missing_context": [
+    "butler/memory/fix-rca.md (属 ⏳ 按需创建，本节点不存在；根因取自 01-root-cause.md RC-1..RC-6)"
+  ]
+}

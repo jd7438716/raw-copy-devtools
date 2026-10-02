@@ -1,0 +1,29 @@
+{
+  "step": "8",
+  "agent": "butler-developer",
+  "task": "TASK-001",
+  "slug": "新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto",
+  "timestamp": "2026-10-02",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/requirements/requirement.md (not present; spec.json used)",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md",
+      "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/TASK-001.md"
+    ],
+    "O": [
+      "butler/project/overview.md",
+      "butler/conventions.md",
+      "butler/domain/development.md",
+      "butler/domain/testing.md",
+      "butler/learned/butler-developer.md"
+    ]
+  },
+  "notes": [
+    "extension/icons/*.png (TASK-013) present: icon16/32/48/128",
+    "scripts/check-syntax.mjs present (build/lint gate)",
+    "no butler/memory/ai-orchestration.json (DAG generator not applicable)"
+  ]
+}

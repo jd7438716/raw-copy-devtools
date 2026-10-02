@@ -1,0 +1,68 @@
+{
+  "slug": "在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增",
+  "source": {
+    "refs": [
+      "req.txt（Chrome DevTools 单条网络请求原始信息一键复制扩展 需求文档 v1.0，作为产品基础上下文，本增强在其上叠加）",
+      "老板本步原话（Phase ① 需求分析指令：在现有 Raw Copy（Chrome/Edge DevTools MV3 扩展）基础上做功能增强：右键菜单复制 / 多选复制 / 双击查看 / 兼容保持）",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/requirement.md（上一里程碑基线需求规格书）"
+    ]
+  },
+  "items": [
+    { "id": "US-001", "type": "data", "source_ref": "§需求背景/Phase1", "title": "作为前端开发，右键单条请求即可复制完整请求+响应原文，直接粘贴给 AI" },
+    { "id": "US-002", "type": "data", "source_ref": "§需求背景/Phase1", "title": "作为测试工程师，多选多条请求并批量复制以附到 Bug 报告" },
+    { "id": "US-003", "type": "data", "source_ref": "§需求背景/Phase1", "title": "作为后端开发，双击某条请求直接查看完整明细原文（无需复制）" },
+    { "id": "US-004", "type": "data", "source_ref": "§需求背景/Phase1", "title": "作为技术支持，通过右键/多选快速取用用户侧请求原文分析" },
+
+    { "id": "REQ-001", "type": "ui", "source_ref": "§需求背景 新增1", "title": "请求列表每一行支持右键：右键即选中该行并弹出上下文菜单" },
+    { "id": "REQ-002", "type": "ui", "source_ref": "§需求背景 新增1", "title": "右键菜单项至少包含「复制请求 + 响应（原始）」" },
+    { "id": "REQ-003", "type": "ui", "source_ref": "§需求背景 新增1", "title": "右键菜单建议同时提供「仅复制请求」「仅复制响应」（原 P2，可一并实现）" },
+    { "id": "REQ-004", "type": "data", "source_ref": "§需求背景 新增1", "title": "菜单点击执行与现有复制按钮等价的复制逻辑：同样纯文本原始格式、不美化 JSON、不改动响应体" },
+    { "id": "REQ-005", "type": "ui", "source_ref": "§需求背景 新增1", "title": "底部复制按钮可保留为补充，但右键必须是主要、易达入口" },
+    { "id": "REQ-006", "type": "ui", "source_ref": "§需求背景 新增2", "title": "多选交互：Ctrl/Cmd+点击 切换单行选中；Shift+点击 范围选择" },
+    { "id": "REQ-007", "type": "ui", "source_ref": "§需求背景 新增2", "title": "保留现有单击选中与 ↑↓ 键导航（↑↓ 仍为单选移动）" },
+    { "id": "REQ-008", "type": "ui", "source_ref": "§需求背景 新增2", "title": "提供「全选」「复制选中(N)」按钮或右键菜单项，N 为当前选中条数" },
+    { "id": "REQ-009", "type": "data", "source_ref": "§需求背景 新增2", "title": "多选输出：多条请求依次拼接，每条之间有清晰分隔（分隔线/序号）" },
+    { "id": "REQ-010", "type": "data", "source_ref": "§需求背景 新增2", "title": "多选输出每条内容仍为「该条请求 + 该条响应」的原始纯文本，保持模式 A/B 语义" },
+    { "id": "REQ-011", "type": "data", "source_ref": "§需求背景 新增2", "title": "多选输出不得把多条内容混淆成一条" },
+    { "id": "REQ-012", "type": "data", "source_ref": "§需求背景 新增2", "title": "单选行为保持不变：现有单条复制格式逐字符不变" },
+    { "id": "REQ-013", "type": "ui", "source_ref": "§需求背景 新增3", "title": "双击请求列表行 → 打开该请求完整明细视图（方法+URL、请求头、请求体、状态码+状态文本、响应头、响应体）" },
+    { "id": "REQ-014", "type": "data", "source_ref": "§需求背景 新增3", "title": "明细内容为原始文本：不美化 JSON、不改动响应体，与复制口径一致" },
+    { "id": "REQ-015", "type": "ui", "source_ref": "§需求背景 新增3", "title": "明细可放面板内详情区/抽屉/弹层；需可关闭并返回列表" },
+    { "id": "REQ-016", "type": "ui", "source_ref": "§需求背景 新增3", "title": "单击仍为选中，双击才触发查看（避免与选中/多选冲突）" },
+    { "id": "REQ-017", "type": "ui", "source_ref": "§需求背景 新增3", "title": "明细视图可提供「复制请求+响应」按钮（可选）" },
+    { "id": "REQ-018", "type": "ops", "source_ref": "§需求背景 新增4", "title": "沿用 MV3（Manifest V3 DevTools 扩展）" },
+    { "id": "REQ-019", "type": "ops", "source_ref": "§需求背景 新增4", "title": "无第三方依赖（零第三方运行时依赖）" },
+    { "id": "REQ-020", "type": "ops", "source_ref": "§需求背景 新增4", "title": "最小权限：仅 clipboardWrite，不新增 host/网络权限" },
+    { "id": "REQ-021", "type": "ops", "source_ref": "§需求背景 新增4", "title": "零网络传输" },
+    { "id": "REQ-022", "type": "data", "source_ref": "§需求背景 新增4", "title": "响应体字符级保真（增强不得破坏基线保真契约）" },
+    { "id": "REQ-023", "type": "data", "source_ref": "§需求背景 新增4", "title": "大响应/二进制/Base64 处理规则不变" },
+    { "id": "REQ-024", "type": "data", "source_ref": "§需求背景 重要", "title": "显式记录需求变更：本增强覆盖 req.txt 非目标「不复制全部请求/只复制当前选中那一条绝不附带其他请求」；单条仍为默认与主要场景" },
+
+    { "id": "DEL-001", "type": "ui", "source_ref": "§需求背景 新增1", "title": "行级右键上下文菜单模块：右键选中该行 + 菜单 UI + 行命中判定" },
+    { "id": "DEL-002", "type": "ui", "source_ref": "§需求背景 新增2", "title": "selection 多选扩展：选中集合 + Ctrl/Cmd 切换 + Shift 范围 + 全选，并回落单选/↑↓" },
+    { "id": "DEL-003", "type": "data", "source_ref": "§需求背景 新增2", "title": "多记录拼接器：分隔线/序号 + 每条各自请求+响应原始块（保持模式 A/B）" },
+    { "id": "DEL-004", "type": "ui", "source_ref": "§需求背景 新增3", "title": "双击明细视图：详情区/抽屉/弹层容器 + 原始文本渲染 + 关闭返回列表" },
+    { "id": "DEL-005", "type": "ui", "source_ref": "§需求背景 新增2", "title": "多选工具栏：「全选」与「复制选中(N)」入口及计数渲染" },
+    { "id": "DEL-006", "type": "ui", "source_ref": "§需求背景 新增1/2/3", "title": "i18n 新增键：右键菜单 / 多选 / 明细文案（zh/en 键集对齐）" },
+    { "id": "DEL-007", "type": "verify", "source_ref": "§需求背景 新增4", "title": "测试：右键复制等价、多选拼接不混淆、双击明细保真、单条逐字符回归" },
+    { "id": "DEL-008", "type": "ops", "source_ref": "§需求背景 重要", "title": "文档更新：USAGE/INSTALL/需求覆盖说明（记录多选复制对原非目标的覆盖）" },
+
+    { "id": "AC-001", "type": "verify", "source_ref": "§验收标准草案", "title": "右键任意行：该行被选中并弹出菜单，至少含「复制请求 + 响应（原始）」" },
+    { "id": "AC-002", "type": "verify", "source_ref": "§验收标准草案", "title": "右键菜单复制产物与底部同名按钮产物逐字符一致（模式 A/B 分别校验）" },
+    { "id": "AC-003", "type": "verify", "source_ref": "§验收标准草案", "title": "右键菜单「仅复制请求」「仅复制响应」（P2）产物与对应按钮等价" },
+    { "id": "AC-004", "type": "verify", "source_ref": "§验收标准草案", "title": "Ctrl/Cmd 切换、Shift 范围、单击单选、↑↓ 单选移动四者互不破坏" },
+    { "id": "AC-005", "type": "verify", "source_ref": "§验收标准草案", "title": "「全选」选中当前列表；「复制选中(N)」的 N 等于当前选中条数且实时更新" },
+    { "id": "AC-006", "type": "verify", "source_ref": "§验收标准草案", "title": "多选输出含 N 段，每段为该条请求+响应原始纯文本，段间清晰分隔，无混淆" },
+    { "id": "AC-007", "type": "verify", "source_ref": "§验收标准草案", "title": "单选复制输出与基线 golden 用例逐字符一致" },
+    { "id": "AC-008", "type": "verify", "source_ref": "§验收标准草案", "title": "双击打开明细，含方法+URL、请求头、请求体、状态码+状态文本、响应头、响应体" },
+    { "id": "AC-009", "type": "verify", "source_ref": "§验收标准草案", "title": "明细响应体逐字符等于原始响应体；头保持原始顺序（不缩进/不排序/不转 Markdown）" },
+    { "id": "AC-010", "type": "verify", "source_ref": "§验收标准草案", "title": "明细可关闭返回列表；单击仅选中不打开明细（仅双击打开）" },
+    { "id": "AC-011", "type": "verify", "source_ref": "§验收标准草案", "title": "明细「复制请求+响应」按钮（P2）产物与主复制按钮一致" },
+    { "id": "AC-012", "type": "verify", "source_ref": "§验收标准草案", "title": "manifest 权限仍仅 clipboardWrite，无 <all_urls>/host_permissions/webRequest/新增网络权限" },
+    { "id": "AC-013", "type": "verify", "source_ref": "§验收标准草案", "title": "复制/查看全流程不发出任何网络请求（零网络传输）" },
+    { "id": "AC-014", "type": "verify", "source_ref": "§验收标准草案", "title": "大响应阈值提示、二进制标注、Base64 处理规则与基线一致" },
+    { "id": "AC-015", "type": "verify", "source_ref": "§验收标准草案", "title": "现有基线用例（捕获/过滤/虚拟滚动/单选/单条复制/剪贴板）全部回归通过" },
+    { "id": "AC-016", "type": "verify", "source_ref": "§验收标准草案", "title": "扩展包体积仍 < 200KB 且仍为零第三方运行时依赖" },
+    { "id": "AC-017", "type": "verify", "source_ref": "§验收标准草案", "title": "规格明确记录多选复制已取代原非目标，且单条仍为默认与主要场景" }
+  ]
+}

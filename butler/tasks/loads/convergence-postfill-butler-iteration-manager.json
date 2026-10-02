@@ -1,0 +1,23 @@
+{
+  "step": "convergence-postfill",
+  "agent": "butler-iteration-manager",
+  "ts": 1790917970000,
+  "slug": "在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增",
+  "required_loaded": [
+    "butler/spec/<slug>/spec.json",
+    "butler/spec/<slug>/test-results.md",
+    "butler/tasks/backlog/<slug>/TASK-001.md .. TASK-015.md"
+  ],
+  "missing_context": [
+    "butler/spec/<slug>/captain-execution.md  (NOT FOUND)",
+    "butler/spec/<slug>/sec-audit.md          (NOT FOUND)"
+  ],
+  "note": "captain-execution.md 与 sec-audit.md 在当前里程碑 spec 目录不存在；execute 节点超时失败(2400000ms)，secaudit 节点仍 pending，故执行/安全报告缺失，按 [MISSING_CONTEXT] 处理并以磁盘证据 + run 快照 + test-results.md 反推缺口。",
+  "supplementary_loaded": [
+    "butler/spec/<slug>/checklist.md",
+    "butler/spec/<slug>/data-audit.md",
+    "butler/.butler2/runs/run_muqg8hsx_j7mhsr.json",
+    "butler/logs/progress.jsonl"
+  ],
+  "result": "proceed_with_available_evidence"
+}

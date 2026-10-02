@@ -1,0 +1,46 @@
+{
+  "step": "TASK-003",
+  "agent": "butler-developer",
+  "task": "TASK-003",
+  "milestone": "enhancement",
+  "slug": "在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增",
+  "timestamp": "2026-10-02T00:00:00+08:00",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md"
+    ],
+    "O": [
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/design.md",
+      "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/requirement.md",
+      "butler/plan/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/plan.md",
+      "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-003.md",
+      "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-005.md",
+      "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-010.md",
+      "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-012.md",
+      "butler/learned/butler-developer.md",
+      "butler/domain/development.md",
+      "butler/domain/testing.md",
+      "extension/panel.js",
+      "extension/panel.html",
+      "extension/src/multiselection.js",
+      "extension/src/selection.js",
+      "extension/src/i18n.js",
+      "extension/styles/panel.css",
+      "tests/multiselection.test.mjs",
+      "tests/i18n.test.mjs",
+      "scripts/check-syntax.mjs",
+      "scripts/check-panel-shell.mjs",
+      "scripts/check-zero-network.mjs"
+    ]
+  },
+  "frame": {
+    "path": "butler/memory/pair/TASK-003-enh/frame/",
+    "status": "missing",
+    "note": "[MISSING_CONTEXT] 无 pair frame 骨架产物（与 TASK-002-enh/004-enh/006-enh 同）；任务描述 + design.md §4.2/§4.3 + ADR-012/014/018 + plan 已内联完整接线点与验收，按 backlog 直接实现（O 级，不阻塞）。"
+  },
+  "missing": [
+    "butler/memory/pair/TASK-003-enh/frame/ (frame-builder 产物缺失，O 级)"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "slug": "在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增",
+  "overall": "heavy",
+  "rationale": "跨模块（panel.js 编排 + 4 个新 ESM 模块 + html/css/i18n + tests/docs）；新增内部 ESM 接口契约；安全相关（AC-012 最小权限门禁 / ADR-013 禁 chrome.contextMenus）；无 DB/无网络/无新增依赖。按判据满足『跨模块 + 新接口 + 安全相关』→ heavy。",
+  "tasks": {
+    "TASK-001": "heavy",
+    "TASK-002": "light",
+    "TASK-003": "heavy",
+    "TASK-004": "standard",
+    "TASK-005": "standard",
+    "TASK-006": "standard",
+    "TASK-007": "standard",
+    "TASK-008": "standard",
+    "TASK-009": "standard",
+    "TASK-010": "light",
+    "TASK-011": "heavy",
+    "TASK-012": "heavy",
+    "TASK-013": "light",
+    "TASK-014": "light",
+    "TASK-015": "light"
+  },
+  "notes": {
+    "TASK-001": "最高回归风险（选中语义核心），需全量跑 selection 13 用例",
+    "TASK-002": "纯结构/样式，无逻辑，宜 light",
+    "TASK-003": "唯一契约切换点（createSelection→createMultiSelection），破坏面板最集中",
+    "TASK-011": "安全相关（权限门禁），AC-012 判定真源",
+    "TASK-012": "冻结契约 + 全量回归门禁，highest-stakes 验证"
+  },
+  "intensity": {
+    "light": "只跑 lint + 与改动相关的单测（不跑全量 test）",
+    "standard": "build + test 全量 + sec-scan",
+    "heavy": "standard + 独立回归（必要时设计评审）"
+  }
+}

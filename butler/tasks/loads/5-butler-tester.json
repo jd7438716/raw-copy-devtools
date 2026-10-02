@@ -1,0 +1,50 @@
+{
+  "step": "5",
+  "agent": "butler-tester",
+  "task": "independent-verification (05-verification-report)",
+  "slug": "对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-",
+  "ts": "2026-10-02T16:45:00+08:00",
+  "mode": "fresh-context / read-only",
+  "loaded": [
+    { "file": "butler/file-registry.md", "mark": "M", "status": "ok", "note": "文件总目录 + Step 加载清单" },
+    { "file": "butler/CONSTITUTION.md", "mark": "M", "status": "ok", "note": "v3.0；§34 作用域契约 + 红线 §19/§20" },
+    { "file": "butler/memory/corrections.md", "mark": "M", "status": "ok", "note": "空（无历史纠错）" },
+    { "file": "butler/project/overview.md", "mark": "O", "status": "ok", "note": "技术栈/约束/AC 双体系说明" },
+    { "file": "butler/learned/butler-tester.md", "mark": "O", "status": "ok", "note": "historical_failures 为空 → regression_block=false" },
+    { "file": "butler/domain/testing.md", "mark": "O", "status": "ok" },
+    { "file": "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/04-execution-summary.md", "mark": "M", "status": "ok", "note": "改动文件清单 + 预期 283/283 + 4 门禁" },
+    { "file": "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/data-audit.md", "mark": "O", "status": "ok", "note": "WARN（checklist 勾选态矛盾，非阻断）" },
+    { "file": "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/spec.md", "mark": "M", "status": "ok", "note": "REQ×16 / DEL×18 / AC×17" },
+    { "file": "package.json", "mark": "M", "status": "ok", "note": "test/build/lint/package 命令定义" },
+    { "file": "tests/README.md", "mark": "M", "status": "ok", "note": "14 文件 / 283 用例 / 门禁口径" },
+    { "file": "extension/model 变更文件集", "mark": "M", "status": "ok", "note": "panel.js/multiselection.js/contextmenu.js/i18n.js/panel.html/panel.css" }
+  ],
+  "missing_context": [],
+  "scope": "affected",
+  "affected": {
+    "changed_files": 17,
+    "tests_run": ["i18n.test.mjs", "multiselection.test.mjs", "formatter.test.mjs", "bulkformatter.test.mjs", "contextmenu.test.mjs"],
+    "must_run": ["i18n", "multiselection", "formatter", "bulkformatter", "contextmenu", "panel-harness"],
+    "historical_failures": [],
+    "degradation": "none",
+    "security_fallback": false,
+    "reverse_dep_method": "import graph (node:test, no static dep tool)"
+  },
+  "env_probe": {
+    "node": "v24.15.0",
+    "os": "win32 (git-bash)",
+    "git": "not a repository (mtime-window + execution-summary cross-check used)",
+    "touches_source": "NO"
+  },
+  "result": {
+    "tests": { "total": 141, "pass": 141, "fail": 0, "exit": 0 },
+    "build_check_syntax": { "files": "15/15", "exit": 0 },
+    "gates": { "check-manifest": "17/17", "check-panel-shell": "41/41", "check-zero-network": "17/17" },
+    "artifact_readonly": { "entries": 25, "unpacked_bytes": 137183, "under_200kb": true, "js_syntax": "15/15", "third_party_deps": 0 },
+    "not_covered": { "tests_not_run": 142, "files": 9, "e2e_real_browser": true },
+    "regression_block": false,
+    "confidence": "high",
+    "verdict": "PASS"
+  },
+  "report": "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/05-verification-report.md"
+}

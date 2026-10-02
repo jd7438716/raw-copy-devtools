@@ -1,0 +1,30 @@
+{
+  "step": "TASK-002",
+  "agent": "butler-developer",
+  "date": "2026-10-02",
+  "mandatory": [
+    "butler/file-registry.md",
+    "butler/CONSTITUTION.md",
+    "butler/memory/corrections.md",
+    "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-002.md",
+    "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/design.md",
+    "butler/plan/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/plan.md"
+  ],
+  "optional": [
+    "butler/project/overview.md",
+    "butler/learned/butler-developer.md",
+    "butler/domain/development.md",
+    "butler/domain/testing.md"
+  ],
+  "load_targets": [
+    "extension/panel.html",
+    "extension/styles/panel.css",
+    "scripts/check-panel-shell.mjs",
+    "scripts/check-syntax.mjs",
+    "scripts/check-zero-network.mjs",
+    "extension/panel.js (els/applyI18n 接线面)",
+    "third-party tasks TASK-003/005/007/009/010 (DOM/i18n 契约)"
+  ],
+  "missing": [],
+  "ai_orchestration_json": "absent (v2.0 not applicable → no DAG executor generation)"
+}

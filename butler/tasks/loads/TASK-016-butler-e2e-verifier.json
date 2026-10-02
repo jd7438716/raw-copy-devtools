@@ -1,0 +1,61 @@
+{
+  "step": "6.1",
+  "agent": "butler-e2e-verifier",
+  "task": "TASK-016",
+  "slug": "在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增",
+  "ts": "2026-10-02T13:40:00+08:00",
+  "loaded": [
+    { "file": "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-016.md", "mark": "M", "status": "ok", "note": "冻结预期：covers AC-001/002/003/008/009/010/011 + DEL-007 + 边界 + 控制台" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/design.md", "mark": "M", "status": "ok", "note": "ADR-013 自绘菜单（禁 chrome.contextMenus）/ ADR-015 批量模板 / ADR-017 明细口径" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/plan.md", "mark": "M", "status": "ok" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/requirement.md", "mark": "M", "status": "ok", "note": "AC-001..AC-017 判定锚点（含 AC-002/003/008/009/010/011）" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/test-results.md", "mark": "M", "status": "ok", "note": "TASK-012 基线：未覆盖 UI 实机验证 → 本任务补齐" },
+    { "file": "butler/file-registry.md", "mark": "M", "status": "ok", "note": "Step 加载清单 + F-73 e2e-test-plan 状态 ⏳" },
+    { "file": "extension/manifest.json", "mark": "M", "status": "ok", "note": "MV3 + permissions=[clipboardWrite] + devtools_page" },
+    { "file": "extension/panel.html", "mark": "M", "status": "ok", "note": "DOM 契约：多选工具栏 / #context-menu / #detail-pane" },
+    { "file": "extension/panel.js", "mark": "M", "status": "ok", "note": "接线面：右键委托 / dblclick / 多选工具栏 / 复制出口" },
+    { "file": "extension/src/{contextmenu,multiselection,bulkformatter,detail,formatter,clipboard,i18n,capture,content}.js", "mark": "M", "status": "ok", "note": "只读；并作为 Node 侧 oracle 复用冻结 formatter/capture/content" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/checklist.md", "mark": "O", "status": "ok" },
+    { "file": "tests/test-cases.md", "mark": "O", "status": "ok", "note": "E2E 步骤索引（基线 E2E-01..16）" },
+    { "file": "tests/README.md", "mark": "O", "status": "ok", "note": "发现测试文件清单表滞后（G-2）" },
+    { "file": "butler/requirements/e2e-test-plan.md", "mark": "M", "status": "MISSING", "note": "F-73 未产出（registry ⏳）；历次 E2E 均缺" }
+  ],
+  "missing_context": ["butler/requirements/e2e-test-plan.md (F-73, butler-e2e-planner 产出缺失)"],
+  "fallback_plan_source": "TASK-016.md 验证清单 + requirement.md AC + design.md §10.4 —— 设计阶段冻结，执行阶段不可篡改",
+  "env_probe": {
+    "node": "v24.15.0",
+    "chrome": "152.0.7977.84 (C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe)",
+    "edge": "154.0.4258.48 (C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe)",
+    "extension_load": "CDP Extensions.loadUnpacked（真实「加载已解压」；--load-extension 在 Chrome≥137 被禁用、≥142 移除临时开关）",
+    "harness": "e2e-artifacts/harness/{cdp.mjs,run-e2e.mjs}；真实系统剪贴板经 PowerShell Get-Clipboard 读取",
+    "touches_source": "NO"
+  },
+  "result": {
+    "report": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/e2e-report.md",
+    "checks_per_browser": 17,
+    "pass_per_browser": 17,
+    "bound_ac_fail": 0,
+    "new_gaps": ["G-1 toolbar #copy-selected-btn 未插值 {count}(可能 AC-005)", "G-2 tests/README.md 测试表滞后", "G-3 Edge readText 陈旧（系统剪贴板正确）"],
+    "verdict": "WARN"
+  },
+  "reverify": {
+    "ts": "2026-10-02T13:52:00+08:00",
+    "trigger": "G-1 修复后聚焦复验（panel.js:865 插值 + panel.js:401-410 reportAsyncCopyError）",
+    "command": "node \"butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/e2e-artifacts/harness/run-e2e.mjs\"",
+    "checks_per_browser": 20,
+    "pass_per_browser": 20,
+    "bound_ac_fail": 0,
+    "unit": "264/264 pass / 0 fail",
+    "console_errors": 0,
+    "csp_violations": 0,
+    "ac_spotcheck": ["AC-001 PASS", "AC-002 PASS", "AC-008 PASS", "AC-010 PASS", "CONSOLE PASS"],
+    "g1_status": "fixed",
+    "g1_evidence": {
+      "n0": "复制选中(0) / disabled=true",
+      "n1": "复制选中(1) / disabled=false",
+      "n3": "复制选中(3) / disabled=false",
+      "browsers": "Chrome 152 + Edge 154 逐字符一致，无字面量 {count}"
+    },
+    "verdict": "PASS"
+  }
+}

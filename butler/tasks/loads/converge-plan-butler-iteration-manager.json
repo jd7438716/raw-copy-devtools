@@ -1,0 +1,23 @@
+{
+  "step": "converge-plan",
+  "agent": "butler-iteration-manager",
+  "timestamp": "2026-10-02T16:30:00+08:00",
+  "slug": "对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-",
+  "phase": "收敛·补齐（只增不改 · 计划期覆盖核对）",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/spec.json"
+    ],
+    "O": [
+      "butler/tasks/backlog/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/TASK-001.md … TASK-016.md",
+      "butler/project/overview.md",
+      "butler/learned/butler-iteration-manager.md（不存在 → 首次运行）"
+    ],
+    "missing": []
+  },
+  "status": "ready",
+  "notes": "spec.json 共 51 个 ID（REQ×16 / DEL×18 / AC×17）；TASK-001..016 的 covers 并集 = 51；差集 spec_ids\\covers = ∅ 且 covers\\spec_ids = ∅ → gaps=0，appended=0。未追加任何 TASK；未改任何代码/既有 TASK。产出 butler/spec/<slug>/convergence.md。"
+}

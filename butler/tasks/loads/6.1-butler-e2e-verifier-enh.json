@@ -1,0 +1,28 @@
+{
+  "step": "6.1",
+  "agent": "butler-e2e-verifier",
+  "slug": "在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增",
+  "ts": "2026-10-02T14:05:00+08:00",
+  "phase": "Phase 6.1 UI/E2E 验收（spec 含 type=ui 触发）",
+  "loaded": [
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/spec.md", "mark": "M", "status": "ok", "note": "53 条：US4+REQ24(含 ui 多条)+DEL8(含 ui)+AC17；type=ui 命中 → 触发本步" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/spec.json", "mark": "M", "status": "ok" },
+    { "file": "butler/file-registry.md", "mark": "M", "status": "ok", "note": "F-73 e2e-test-plan.md 状态 ⏳（历次 E2E 均缺）" },
+    { "file": "extension/manifest.json", "mark": "M", "status": "ok", "note": "MV3 + permissions=[clipboardWrite]" },
+    { "file": "extension/panel.html + panel.js", "mark": "M", "status": "ok", "note": "UI 契约：多选工具栏 / #context-menu / #detail-pane" },
+    { "file": "extension/src/{contextmenu,multiselection,bulkformatter,detail,formatter,clipboard,i18n,capture,content}.js", "mark": "M", "status": "ok", "note": "只读；Node 侧 oracle 复用冻结 formatter/capture/content" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/e2e-artifacts/harness/{cdp.mjs,run-e2e.mjs}", "mark": "M", "status": "ok", "note": "真实 Chromium E2E 执行器（零依赖）" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/design.md", "mark": "O", "status": "ok", "note": "ADR-013 自绘菜单 / ADR-015 批量模板 / ADR-017 明细口径" },
+    { "file": "butler/requirements/e2e-test-plan.md", "mark": "M", "status": "MISSING", "note": "F-73 未产出（registry ⏳）" }
+  ],
+  "missing_context": ["butler/requirements/e2e-test-plan.md (F-73, butler-e2e-planner 产出缺失)"],
+  "fallback_plan_source": "spec.md AC-001..017 + design.md + e2e-artifacts/harness/run-e2e.mjs（设计阶段冻结，执行阶段不可篡改）",
+  "env_probe": {
+    "node": "v24.15.0",
+    "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "edge": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "extension_load": "CDP Extensions.loadUnpacked（真实「加载已解压」）",
+    "app_target": "静态 MV3 扩展（无 npm run dev / dev server）",
+    "touches_source": "NO"
+  }
+}

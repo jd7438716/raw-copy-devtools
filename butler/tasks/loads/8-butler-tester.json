@@ -1,0 +1,20 @@
+{
+  "step": "8",
+  "agent": "butler-tester",
+  "task": "独立验证 raw-copy v1.1.0 三项修复/调整（affected 范围）",
+  "date": "2026-10-02",
+  "mode": "fresh-context readonly",
+  "files_loaded": [
+    "butler/file-registry.md",
+    "butler/CONSTITUTION.md",
+    "butler/memory/corrections.md",
+    "butler/learned/butler-tester.md",
+    "butler/domain/testing.md",
+    "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/04-execution-summary.md",
+    "butler/spec/对现有-raw-copy-chrome-edge-devtools-mv3-扩展-v1-1-0-/05-verification-report.md",
+    "package.json",
+    "tests/*.mjs (import 图反查)"
+  ],
+  "m_missing": [],
+  "notes": "非 git 仓库；变更识别用 mtime 窗口 16:34-16:46 + 04 execution summary 交叉核对"
+}

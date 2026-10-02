@@ -1,0 +1,30 @@
+{
+  "step": "06-security-report",
+  "agent": "butler-sec-auditor",
+  "slug": "缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢",
+  "scope": "changed",
+  "ts": "2026-10-02",
+  "loaded": [
+    "butler/CONSTITUTION.md",
+    "butler/file-registry.md",
+    "butler/memory/corrections.md",
+    "butler/project/overview.md",
+    "butler/domain/security.md",
+    "butler/learned/sec-auditor.md",
+    "butler/spec/缺陷-raw-copy-...-丢/{spec.md,01-root-cause.md,02-solution-design.md,04-execution-summary.md,checklist.md,convergence.md,data-audit.md}",
+    "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/sec-audit.md",
+    "extension/src/{store.js,capture.js,content.js,i18n.js}",
+    "extension/panel.js",
+    "extension/manifest.json",
+    "tests/{store,capture,enrich,i18n,content}.test.mjs（断言面）",
+    "scripts/{check-syntax,check-manifest,check-zero-network}.mjs（复跑）"
+  ],
+  "missing_optional": [
+    "butler/project/security-constraints.md"
+  ],
+  "dynamic_audits": [
+    "butler_sec_scan x5 (PASS)",
+    "node --test (145/145)",
+    "inline store memory probes (4)"
+  ]
+}

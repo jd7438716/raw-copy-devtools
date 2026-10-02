@@ -1,0 +1,33 @@
+{
+  "step": "TASK-008-butler-doc-writer",
+  "agent": "butler-doc-writer",
+  "timestamp": "2026-10-02",
+  "task": "butler/tasks/backlog/缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢/TASK-008.md",
+  "slug": "缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢",
+  "loaded": {
+    "M": [
+      "butler/tasks/backlog/缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢/TASK-008.md",
+      "butler/spec/缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢/01-root-cause.md (§9 RC-2 / §10.4)",
+      "butler/spec/缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢/02-solution-design.md (方案 A，已批准)",
+      "butler/spec/缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢/spec.json (REQ-010 / DEL-007..009 / AC-012)",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/feasibility.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/stories-written.md"
+    ],
+    "O": [
+      "butler/learned/butler-doc-writer.md",
+      "butler/memory/documentation.md",
+      "extension/src/capture.js (异步 enrich / 双形态 getContent 实现核对)",
+      "extension/src/store.js (update/maxBytes/pending 实现核对)",
+      "extension/panel.js (awaitPending / PENDING_TIMEOUT_MS 实现核对)",
+      "extension/src/i18n.js (content.fetching / copy.fetchingTimeout)",
+      "butler/tasks/loads/TASK-015-butler-doc-writer.json (日志格式参照)"
+    ]
+  },
+  "code_consistency_check": {
+    "capture.js": "maybeEnrich/applyContent 独立异步 enrich；getContent 回调+Promise 双形态；并发/队列上限+超时兜底 — 与 ADR-003 修订一致",
+    "store.js": "update(id,patch) 原地回填 / bytesInUse()/maxBytes / markPending..awaitPending — 与降级矩阵、R1 缓解一致",
+    "panel.js": "PENDING_TIMEOUT_MS=3s + awaitPending(record.id) — 与 stories AC 竞态期望一致"
+  },
+  "missing_context": []
+}

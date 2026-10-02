@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "subagent_depth": 5,
+  "agent": {
+    "rules": {
+      "read-constitution": "先读 butler/CONSTITUTION.md",
+      "read-registry": "先读 butler/file-registry.md",
+      "read-corrections": "先读 butler/memory/corrections.md"
+    }
+  },
+  "skills": {
+    "paths": [".opencode/skills/"]
+  }
+}

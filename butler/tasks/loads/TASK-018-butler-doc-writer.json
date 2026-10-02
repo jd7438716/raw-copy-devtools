@@ -1,0 +1,32 @@
+{
+  "step": "TASK-018",
+  "agent": "butler-doc-writer",
+  "task": "TASK-018",
+  "slug": "在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增",
+  "ts": "2026-10-02T14:10:00+08:00",
+  "loaded": [
+    { "file": "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-018.md", "mark": "M", "status": "ok", "note": "本次任务契约：三组用例 + AC-015 口径 + README 4 新文件/4 门禁 + E2E 指针" },
+    { "file": "butler/tasks/backlog/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/TASK-013.md", "mark": "M", "status": "ok", "note": "TASK-013 残项原文内容要求（同一目标）" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/e2e-report.md", "mark": "M", "status": "ok", "note": "TASK-016 E2E 实机结果（Chrome/Edge 17/17 PASS；verdict=WARN）作为文档 E2E 证据指针" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/requirement.md", "mark": "M", "status": "ok", "note": "增强里程碑 AC-001..AC-017 真源（逐条判定锚点）" },
+    { "file": "butler/spec/在现有-raw-copy-chrome-edge-devtools-mv3-扩展-基础上做功能增/spec.md", "mark": "O", "status": "ok", "note": "AC-001..AC-017 摘要（与 requirement 一致）" },
+    { "file": "tests/test-cases.md", "mark": "M", "status": "ok", "note": "待追加 §1b 三组用例 + AC-015 口径；现有清单 123 用例=滞后" },
+    { "file": "tests/README.md", "mark": "M", "status": "ok", "note": "待新增 4 测试文件条目 + 4 门禁清单 + 修正 264 用例" },
+    { "file": "tests/*.test.mjs", "mark": "M", "status": "ok", "note": "14 文件 / 264 用例（实测 node --test 全量 pass）；新增 contextmenu/multiselection/bulkformatter/detail/enrich" },
+    { "file": "scripts/check-{manifest,syntax,zero-network,panel-shell}.mjs", "mark": "M", "status": "ok", "note": "4 门禁脚本实测：manifest 17/17、syntax 15/15、zero-network 17/17、panel-shell 34/34" },
+    { "file": "butler/file-registry.md", "mark": "M", "status": "ok", "note": "Step 加载清单 + 增强里程碑文件登记（F-ENH06b/04b 等）" },
+    { "file": "butler/CONSTITUTION.md", "mark": "M", "status": "ok", "note": "项目宪法基线" },
+    { "file": "butler/memory/corrections.md", "mark": "M", "status": "ok", "note": "历史纠错（当前为空）" },
+    { "file": "butler/project/overview.md", "mark": "O", "status": "ok", "note": "文档约定：测试文档 tests/test-cases.md + tests/README.md" },
+    { "file": "butler/learned/butler-doc-writer.md", "mark": "O", "status": "ok" },
+    { "file": "butler/requirements/e2e-test-plan.md", "mark": "O", "status": "MISSING", "note": "F-73 未产出（e2e-report 已记为 [MISSING_CONTEXT]）；本任务改用 e2e-report.md 作为 E2E 证据源" }
+  ],
+  "missing_context": ["butler/requirements/e2e-test-plan.md (F-73) —— 由 e2e-report.md 替代为 E2E 证据指针"],
+  "measured": {
+    "test_files": 14,
+    "test_cases": 264,
+    "node_test": "264 pass / 0 fail",
+    "gates": { "check-syntax": "15/15", "check-manifest": "17/17", "check-zero-network": "17/17", "check-panel-shell": "34/34" }
+  },
+  "scope": "仅改文档（tests/test-cases.md、tests/README.md）+ 4 个新测试文件的头注释；不改业务代码 / 断言逻辑 / file-registry.md"
+}

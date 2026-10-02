@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Raw Copy</title>
+  <link rel="stylesheet" href="styles/panel.css">
+</head>
+<body>
+  <!--
+    Raw Copy DevTools panel shell (TASK-002).
+    Every visible string is injected by panel.js through the i18n t() helper,
+    so this file intentionally contains no human-readable copy at all.
+    Element ids below are a stable contract for TASK-004..009; do not rename.
+  -->
+  <div id="app" class="app">
+
+    <!-- Toolbar: search + method/status/type filters. -->
+    <header id="toolbar" class="toolbar">
+      <div class="toolbar__row">
+        <input id="search" class="toolbar__search" type="search"
+               data-i18n-placeholder="filter.searchPlaceholder"
+               autocomplete="off" spellcheck="false">
+
+        <span class="toolbar__sep" aria-hidden="true"></span>
+
+        <label class="filter">
+          <span class="filter__label" data-i18n="filter.method"></span>
+          <select id="filter-method" class="filter__select">
+            <option value="" selected data-i18n="filter.all"></option>
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="DELETE">DELETE</option>
+            <option value="PATCH">PATCH</option>
+            <option value="HEAD">HEAD</option>
+            <option value="OPTIONS">OPTIONS</option>
+          </select>
+        </label>
+
+        <label class="filter">
+          <span class="filter__label" data-i18n="filter.status"></span>
+          <select id="filter-status" class="filter__select">
+            <option value="" selected data-i18n="filter.all"></option>
+            <option value="2xx">2xx</option>
+            <option value="3xx">3xx</option>
+            <option value="4xx">4xx</option>
+            <option value="5xx">5xx</option>
+          </select>
+        </label>
+
+        <label class="filter">
+          <span class="filter__label" data-i18n="filter.resourceType"></span>
+          <select id="filter-type" class="filter__select">
+            <option value="" selected data-i18n="filter.all"></option>
+            <option value="XHR">XHR</option>
+            <option value="Fetch">Fetch</option>
+            <option value="Document">Document</option>
+            <option value="Script">Script</option>
+            <option value="Stylesheet">Stylesheet</option>
+            <option value="Image">Image</option>
+            <option value="Font">Font</option>
+            <option value="Media">Media</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+
+        <span class="toolbar__spacer"></span>
+      </div>
+
+      <!--
+        Multiselect toolbar (DEL-005 / REQ-008, ADR-020 additive).
+        Hidden by default; TASK-003/005 wire the selection set, count and
+        button enablement. Ids below are the stable contract for those tasks.
+        Copy stays i18n-driven: no inline human-readable text (TASK-010 adds
+        the `multi.*` keys).
+      -->
+      <div id="multiselect-actions" class="multiselect" role="group" hidden>
+        <button id="select-all-btn" class="btn" type="button"
+                data-i18n="multi.selectAll"></button>
+        <button id="copy-selected-btn" class="btn" type="button"
+                data-i18n="multi.copySelected" disabled></button>
+        <span id="selected-count" class="multiselect__count"
+              aria-live="polite" data-i18n="multi.selectedCount"></span>
+      </div>
+    </header>
+
+    <!--
+      List area. Header defines the 7 fixed columns (REQ-005 / AC-012);
+      #list is the scroll container, #list-body is the row host that the
+      virtual-list renderer (TASK-004) will populate. Fixed row height lives
+      in styles/panel.css (--row-height) so windowing math is stable.
+    -->
+    <section id="list" class="list" role="grid" aria-rowcount="0" tabindex="0">
+      <div class="list__header" role="row">
+        <span class="col col--method" role="columnheader" data-i18n="col.method"></span>
+        <span class="col col--url" role="columnheader" data-i18n="col.url"></span>
+        <span class="col col--status" role="columnheader" data-i18n="col.status"></span>
+        <span class="col col--type" role="columnheader" data-i18n="col.resourceType"></span>
+        <span class="col col--time" role="columnheader" data-i18n="col.time"></span>
+        <span class="col col--size" role="columnheader" data-i18n="col.size"></span>
+        <span class="col col--started" role="columnheader" data-i18n="col.started"></span>
+      </div>
+
+      <div id="list-body" class="list__body" role="rowgroup">
+        <!-- Rows are injected by TASK-004 (render.js). Empty for now. -->
+      </div>
+
+      <div id="empty" class="empty" hidden>
+        <p class="empty__title" data-i18n="empty.title"></p>
+        <p class="empty__hint" data-i18n="empty.hint"></p>
+      </div>
+    </section>
+
+    <!--
+      Copy actions. #copy-btn is the primary "copy request + response" action
+      (mode A); #copy-btn-a / #copy-btn-b are the explicit mode A/B actions
+      (action = mode, REQ-006) and carry `data-copy-mode`. #copy-curl-btn and
+      the privacy entry remain. Every visible string is injected via data-i18n.
+    -->
+    <footer id="copy-actions" class="copy-actions">
+      <button id="copy-btn" class="btn btn--primary" type="button" data-i18n="copy.button"></button>
+      <button id="copy-btn-a" class="btn copy-mode-btn" type="button"
+              data-copy-mode="A" data-i18n="mode.aButton"></button>
+      <button id="copy-btn-b" class="btn copy-mode-btn" type="button"
+              data-copy-mode="B" data-i18n="mode.bButton"></button>
+      <button id="copy-curl-btn" class="btn" type="button" data-i18n="copy.buttonCurl"></button>
+      <span class="copy-actions__spacer"></span>
+      <a id="privacy-link" class="privacy-link" href="privacy.html" data-i18n="privacy.link"></a>
+    </footer>
+
+    <!--
+      Self-drawn context menu (DEL-001 / REQ-001, ADR-013).
+      Purely DOM-based: no `contextMenus` permission is requested. TASK-007
+      populates items with textContent and positions it via clampPosition.
+      Hidden until then.
+    -->
+    <div id="context-menu" class="context-menu" role="menu" tabindex="-1" hidden></div>
+
+    <!--
+      Detail drawer (DEL-004 / REQ-015, ADR-017).
+      Overlay covering the panel (position:absolute; inset:0) with a clickable
+      backdrop; #detail-body is a <pre> filled via textContent (never innerHTML)
+      by TASK-009. Hidden until then.
+    -->
+    <section id="detail-pane" class="detail-pane" role="dialog"
+             aria-modal="true" hidden>
+      <div class="detail-pane__backdrop" data-detail-backdrop></div>
+      <div class="detail-pane__surface">
+        <header class="detail-pane__header">
+          <span class="detail-pane__title" data-i18n="detail.title"></span>
+          <button id="detail-close" class="btn detail-pane__close" type="button"
+                  data-i18n="detail.close"></button>
+        </header>
+        <pre id="detail-body" class="detail-pane__body"></pre>
+      </div>
+    </section>
+
+    <!-- Toast region (aria-live so screen readers announce copy results). -->
+    <div id="toast" class="toast" role="status" aria-live="polite" data-visible="false"></div>
+  </div>
+
+  <script type="module" src="panel.js"></script>
+</body>
+</html>

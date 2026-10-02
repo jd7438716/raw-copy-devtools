@@ -1,0 +1,31 @@
+{
+  "step": "fix-execute",
+  "agent": "butler-rf-fixer",
+  "date": "2026-10-02",
+  "slug": "缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢",
+  "run": "run_muqf95nu_ddw3lq",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/tasks/backlog/<slug>/TASK-001..009.md",
+      "butler/tasks/backlog/<slug>/dependency-graph.md",
+      "butler/tasks/backlog/<slug>/weight.json",
+      "butler/spec/<slug>/spec.json",
+      "butler/spec/<slug>/01-root-cause.md",
+      "butler/spec/<slug>/02-solution-design.md"
+    ],
+    "O": [
+      "butler/spec/<slug>/checklist.md",
+      "butler/spec/<slug>/data-audit.md",
+      "butler/spec/<slug>/convergence.md",
+      "butler/project/overview.md",
+      "extension/src/{store,capture,content,i18n,formatter}.js",
+      "extension/panel.js",
+      "tests/{store,capture,content,i18n,formatter}.test.mjs"
+    ],
+    "missing": [],
+    "note": "butler/learned/butler-rf-fixer.md 不存在（O）→ 跳过"
+  }
+}

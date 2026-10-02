@@ -1,0 +1,42 @@
+{
+  "step": "TASK-005",
+  "agent": "butler-developer",
+  "task": "TASK-005",
+  "timestamp": "2026-10-02T12:00:00+08:00",
+  "slug": "新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/config.json",
+      "butler/file-registry.md",
+      "butler/memory/corrections.md"
+    ],
+    "O": [
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/requirement.md",
+      "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/TASK-005.md",
+      "butler/file-registry.md (§3)",
+      "extension/panel.js",
+      "extension/panel.html",
+      "extension/styles/panel.css",
+      "extension/src/render.js",
+      "extension/src/store.js",
+      "extension/src/filter.js",
+      "extension/src/capture.js",
+      "extension/src/i18n.js",
+      "tests/render.test.mjs",
+      "scripts/check-syntax.mjs",
+      "scripts/check-panel-shell.mjs",
+      "scripts/check-zero-network.mjs"
+    ]
+  },
+  "frame": {
+    "path": "butler/memory/pair/TASK-005/frame/",
+    "status": "missing",
+    "note": "[MISSING_CONTEXT] 无 pair frame 产物；任务描述已内联完整交付标准，design.md §5.3 接口表为真源，按 backlog 直接实现。"
+  },
+  "missing": [
+    "butler/memory/pair/TASK-005/frame/ (frame-builder 产物，未生成；O 级，不阻塞)"
+  ],
+  "status": "ready"
+}

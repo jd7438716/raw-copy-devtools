@@ -1,0 +1,27 @@
+{
+  "step": "6.1",
+  "agent": "butler-e2e-verifier",
+  "slug": "缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢",
+  "ts": "2026-10-02T12:05:00+08:00",
+  "loaded": [
+    { "file": "butler/spec/缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢/spec.json", "mark": "M", "status": "ok", "note": "type=ui 命中 REQ-005/006 + DEL-002/004 → 触发 UI/E2E 验收" },
+    { "file": "butler/spec/缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢/spec.md", "mark": "M", "status": "ok" },
+    { "file": "butler/tasks/backlog/缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢/TASK-009.md", "mark": "M", "status": "ok", "note": "冻结预期（covers AC-002/AC-011）：真机 401 逐字符 / 本地 fixture 降级 / 全量回归" },
+    { "file": "butler/spec/缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢/04-execution-summary.md", "mark": "O", "status": "ok" },
+    { "file": "butler/spec/缺陷-raw-copy-扩展复制出的内容里-response-body-显示为-响应体不可用-丢/05-verification-report.md", "mark": "O", "status": "ok" },
+    { "file": "butler/file-registry.md", "mark": "M", "status": "ok" },
+    { "file": "extension/manifest.json", "mark": "M", "status": "ok" },
+    { "file": "extension/panel.html + panel.js", "mark": "M", "status": "ok" },
+    { "file": "extension/src/capture.js + store.js + content.js + clipboard.js + i18n.js", "mark": "M", "status": "ok" },
+    { "file": "butler/requirements/e2e-test-plan.md", "mark": "M", "status": "MISSING", "note": "F-73 未产出（registry ⏳）" }
+  ],
+  "missing_context": ["butler/requirements/e2e-test-plan.md (F-73, butler-e2e-planner 产出缺失)"],
+  "fallback_plan_source": "TASK-009.md 验收清单 + spec.json AC-001/002/003/005/006/007/008/011 —— 设计阶段冻结，执行阶段不可篡改",
+  "env_probe": {
+    "node": "v24.15.0",
+    "chrome_devtools_mcp": "connected (1 page, navigated to local panel.html)",
+    "browser_desktop_tool": "not used",
+    "harness": "临时 Node 静态服务器 127.0.0.1:8791 承载 extension/（已删除）；navigate_page initScript 注入 chrome.devtools.network 桥 + clipboard mock",
+    "touches_source": "NO"
+  }
+}

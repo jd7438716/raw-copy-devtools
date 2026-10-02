@@ -1,0 +1,33 @@
+{
+  "step": "TASK-015-butler-doc-writer",
+  "agent": "butler-doc-writer",
+  "timestamp": "2026-10-02",
+  "task": "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/TASK-015.md",
+  "loaded": {
+    "M": [
+      "butler/CONSTITUTION.md",
+      "butler/memory/corrections.md",
+      "butler/file-registry.md",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/design.md (§11 建议实现顺序 M1-M5 / DEL 落点)",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/requirement.md (§4.5 里程碑 M1-M5；§11 交付物清单；AC-019)",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/spec.json (DEL-010..DEL-018 / AC-019)",
+      "butler/spec/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/spec.md"
+    ],
+    "O": [
+      "butler/learned/butler-doc-writer.md",
+      "butler/memory/documentation.md",
+      "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/dependency-graph.md",
+      "butler/tasks/backlog/新建一个-chrome-edge-devtools-扩展-manifest-v3-在-devto/TASK-001..016.md (标题/phase/covers 用于里程碑映射)",
+      "extension/manifest.json",
+      "extension/privacy.html",
+      "INSTALL.md",
+      "USAGE.md",
+      "LICENSE",
+      "tests/test-cases.md",
+      "tests/README.md",
+      "dist/raw-copy-1.0.0.zip",
+      "scripts/check-manifest.mjs / check-syntax.mjs / check-zero-network.mjs / check-panel-shell.mjs"
+    ]
+  },
+  "missing_context": []
+}
