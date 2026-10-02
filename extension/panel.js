@@ -23,6 +23,8 @@ import { t } from './src/i18n.js';
 import { createStore } from './src/store.js';
 import { installCapture } from './src/capture.js';
 import { applyFilter, collectOptions } from './src/filter.js';
+import { applyHide } from './src/hidefilter.js';
+import { splitUrl } from './src/urlparts.js';
 import { createVirtualList } from './src/render.js';
 import { createMultiSelection } from './src/multiselection.js';
 import {
@@ -65,6 +67,9 @@ export const els = {
   filterMethod: document.querySelector('#filter-method'),
   filterStatus: document.querySelector('#filter-status'),
   filterType: document.querySelector('#filter-type'),
+  hideToggle: document.querySelector('#hide-static-toggle'),
+  listCount: document.querySelector('#list-count'),
+  clearBtn: document.querySelector('#clear-btn'),
 
   list: document.querySelector('#list'),
   listBody: document.querySelector('#list-body'),
@@ -505,9 +510,9 @@ function formatStarted(iso) {
   return iso.slice(11, 19);
 }
 
-/** 惰性构建 7 列（与 panel.html 表头顺序、panel.css `--col-grid` 一致）。 */
+/** 惰性构建 8 列（与 panel.html 表头顺序、panel.css `--col-grid` 一致）。 */
 function ensureRowColumns(el) {
-  if (el.children && el.children.length === 7) {
+  if (el.children && el.children.length === 8) {
     return;
   }
   while (el.firstChild) {
@@ -515,7 +520,8 @@ function ensureRowColumns(el) {
   }
   const classes = [
     'col col--method',
-    'col col--url',
+    'col col--host',
+    'col col--path',
     'col col--status',
     'col col--type',
     'col col--time',
@@ -535,14 +541,25 @@ function renderRow(record, el) {
   const rec = record || {};
   ensureRowColumns(el);
   const cols = el.children;
+  const fullUrl = typeof rec.url === 'string' ? rec.url : '';
+  const parts = splitUrl(fullUrl);
   cols[0].textContent = rec.method ? String(rec.method) : '?';
-  cols[1].textContent = typeof rec.url === 'string' ? rec.url : '';
-  cols[2].textContent = formatStatus(rec.status);
-  cols[3].textContent = typeof rec.resourceType === 'string' ? rec.resourceType : '';
-  cols[4].textContent = formatTime(rec.time);
+  cols[1].textContent = parts.host;
+  cols[2].textContent = parts.path;
+  cols[3].textContent = formatStatus(rec.status);
+  cols[4].textContent = typeof rec.resourceType === 'string' ? rec.resourceType : '';
+  cols[5].textContent = formatTime(rec.time);
   const content = rec.responseContent;
-  cols[5].textContent = formatSize(content ? content.size : NaN);
-  cols[6].textContent = formatStarted(rec.startedDateTime);
+  cols[6].textContent = formatSize(content ? content.size : NaN);
+  cols[7].textContent = formatStarted(rec.startedDateTime);
+
+  // 域名 / 路径拆列后，悬停任一列显示完整 URL（不改变复制产物）。
+  if (typeof cols[1].setAttribute === 'function') {
+    cols[1].setAttribute('title', fullUrl);
+  }
+  if (typeof cols[2].setAttribute === 'function') {
+    cols[2].setAttribute('title', fullUrl);
+  }
 
   // TASK-005 单选高亮 + TASK-003 多选集合高亮。
   // 主判定为集合成员（has）；↑↓ move 会清空集合回落单选，故同时保留
@@ -675,6 +692,9 @@ function init() {
 
   let rafPending = false;
 
+  /** 静态资源隐藏开关状态（默认隐藏；不持久化，面板每次打开回落默认）。 */
+  let hideStatic = true;
+
   /** 读取工具栏当前筛选条件。 */
   function readCriteria() {
     return {
@@ -714,7 +734,7 @@ function init() {
     }
   }
 
-  /** 全量重绘：派生选项 → 过滤 → 倒序（最新在上）→ 虚拟列表 + 空态。 */
+  /** 全量重绘：派生选项 → 过滤 → 隐藏静态资源 → 倒序（最新在上）→ 虚拟列表 + 空态。 */
   function refreshView() {
     const all = store.all();
     const options = collectOptions(all);
@@ -723,8 +743,10 @@ function init() {
     syncSelect(els.filterType, options.resourceTypes);
 
     const filtered = applyFilter(all, readCriteria());
+    // 隐藏静态资源：在用户筛选之后串联（AND），只影响视图/选择/计数，不动 store。
+    const visible = applyHide(filtered, hideStatic);
     // store.all() 为「最旧→最新」，倒序后即最新在上（新请求追加可见）。
-    const display = filtered.slice().reverse();
+    const display = visible.slice().reverse();
     virtualList.setData(display);
     // 选中状态跟随【当前可见（已过滤）列表】：序号与虚拟列表 data-index 一致，
     // ↑↓ move 即在此可见列表内切换（REQ-011 / AC-004）。
@@ -735,7 +757,30 @@ function init() {
     );
     // 工具栏计数/使能在剪枝后即时收敛（集合未变时 onChange 不触发，故显式同步一次）。
     updateMultiToolbar();
-    updateEmptyState(all.length, filtered.length);
+    updateCount(filtered.length, display.length);
+    updateEmptyState(all.length, display.length);
+  }
+
+  /**
+   * 更新「显示 X/Y 条 · 已隐藏 Z」计数。
+   *
+   * @param {number} filteredCount 用户筛选后的条数（Y）
+   * @param {number} shownCount    再经隐藏后的可见条数（X）
+   * @returns {void}
+   */
+  function updateCount(filteredCount, shownCount) {
+    if (!els.listCount) {
+      return;
+    }
+    if (filteredCount <= 0) {
+      els.listCount.textContent = '';
+      return;
+    }
+    const hidden = filteredCount - shownCount;
+    els.listCount.textContent =
+      hidden > 0
+        ? t('list.hiddenCount', { shown: shownCount, total: filteredCount, hidden: hidden })
+        : t('list.showCount', { shown: shownCount, total: filteredCount });
   }
 
   /** rAF 批处理刷新（高频捕获时合并到一帧，护 REQ-029）。 */
@@ -896,6 +941,25 @@ function init() {
     els.filterType.addEventListener('change', requestRefresh);
   }
 
+  // 隐藏静态资源开关（默认开）；切换即重算视图（数据仍留在 store）。
+  if (els.hideToggle) {
+    els.hideToggle.checked = hideStatic;
+    els.hideToggle.addEventListener('change', function onHideToggleChange() {
+      hideStatic = !!els.hideToggle.checked;
+      requestRefresh();
+    });
+  }
+
+  // 清除网络日志：清空 store（订阅回调会复位选中/详情并刷新视图）。
+  if (els.clearBtn) {
+    els.clearBtn.addEventListener('click', function onClearClick() {
+      store.clear();
+      if (els.list && typeof els.list.focus === 'function') {
+        els.list.focus();
+      }
+    });
+  }
+
   // 捕获：新记录入 store 后驱动列表刷新；异步 enrich 回填后再刷新一次（REQ-005 / AC-008）。
   installCapture({ store, onAdd: requestRefresh, onUpdate: requestRefresh });
 
@@ -924,6 +988,7 @@ function init() {
     } else if (event.type === 'clear') {
       multi.clear();
       closeDetailPane();
+      requestRefresh();
     }
   });
 

@@ -51,7 +51,7 @@
 
 | 用例 ID | AC | REQ/US | 类型 | 用例步骤 | 预期结果 | 自动化状态 |
 |---------|:--:|:------:|:----:|----------|----------|:----------:|
-| TC-AC-012 | AC-012 | REQ-005 / US-002 | 门禁 + E2E | ①`node scripts/check-panel-shell.mjs` 断言表头恰好 7 列（`data-i18n="col.*"`）+ 稳定 DOM id；②浏览器观察每行 7 字段 | ①34/34 项 PASS；②每行显示 方法/URL/状态码/资源类型/耗时(ms)/大小/时间 | ◐（面板外壳 ✅ / 真实数据填充 ⏳ 待 E2E） |
+| TC-AC-012 | AC-012 | REQ-005 / US-002 | 门禁 + E2E | ①`node scripts/check-panel-shell.mjs` 断言表头恰好 8 列（`data-i18n="col.*"`）+ 稳定 DOM id；②浏览器观察每行 8 字段 | ①44/44 项 PASS；②每行显示 方法/域名/路径/状态码/资源类型/耗时(ms)/大小/时间 | ◐（面板外壳 ✅ / 真实数据填充 ⏳ 待 E2E） |
 | TC-AC-013 | AC-013 | REQ-004 / US-003 | 单元 | `tests/store.test.mjs`：`DEFAULT_CAPACITY===1000`；追加 1001 条 → size=1000、首条淘汰、末条保留；cap=3 追加 5 条顺序正确；clear/get/all | 环形缓冲 O(1) 淘汰，无泄漏（cap 恒定） | ✅ `tests/store.test.mjs`（9 用例） |
 | TC-AC-014 | AC-014 | REQ-015,016 / US-003 | 单元 | `tests/formatter.test.mjs`：请求头/响应头按数组序输出，不排序/不去重/不合并同名；兼容 string 头行；`tests/capture.test.mjs` 断言归一化保序 | 头 `Name: Value` 原序；体逐字符不美化 | ✅ `tests/formatter.test.mjs` + `tests/capture.test.mjs` |
 | TC-AC-016 | AC-016 | REQ-033 / US-004 | 单元 + 门禁 | ①`tests/i18n.test.mjs`：默认 zh 命中中文、插值、en 键集与 zh 完全一致（结构预留）；②`scripts/check-panel-shell.mjs`：`panel.html` 无裸中文（文案走 `data-i18n`）、`panel.js` 字符串字面量无中文 | ①i18n 结构对齐；②中文优先且结构可扩展 | ✅ `tests/i18n.test.mjs` + `check-panel-shell.mjs` |
@@ -154,6 +154,17 @@ node scripts/check-panel-shell.mjs     # 期望：PASS (34/34)
 
 **完整证据链**：单测（本文件 §1 / §1b + `tests/*.test.mjs`，264 用例）→ E2E（`e2e-report.md`）→ 门禁（§4 四脚本）→ AC-015 回归口径（§1b.5）。
 
+### 1b.7 静态资源隐藏 / 清除网络日志 / URL 显示简化（新增）
+
+> 来源：本轮需求（隐藏 `.js/.css/字体/图片/媒体/PDF`、清除网络日志、URL 拆「域名 + 路径」）。测试用例总数 283 → 302。
+
+| 用例 ID | 关联 | 类型 | 用例步骤 | 预期结果 | 自动化状态 |
+|---|---|---|---|---|---|
+| TC-ENH-HIDE-01 | 静态资源判定 | 单元 | `tests/hidefilter.test.mjs`：`script/stylesheet/font/image/media`（含 PascalCase）→ 隐藏；`xhr/fetch/websocket/eventsource` → 保留；`document` 仅 PDF 隐藏；`other` 用 MIME/扩展名辅助；`.json` / 无扩展名 API 反例不隐藏 | 判定唯一、可断言；API 不误伤 | ✅ `tests/hidefilter.test.mjs` |
+| TC-ENH-HIDE-02 | 视图隐藏 + 计数 + 全选收敛 | 面板级接线（真实 panel.js + DOM shim） | `tests/panel-controls.test.mjs`：喂入 xhr/script/image/fetch/font/document/pdf；默认仅 3 条可见、计数「显示 3/7 条」；全选只含可见 id；取消开关恢复 7 条 | 隐藏仅作用于视图/选择/计数；数据仍保留在 store | ✅ `tests/panel-controls.test.mjs` |
+| TC-ENH-CLEAR-01 | 清除网络日志 | 面板级接线 | 点击 `#clear-btn` → 列表 / 计数 / 选中归零 | 清空后回到空态 | ✅ `tests/panel-controls.test.mjs` |
+| TC-ENH-URL-01 | URL → 域名/路径 | 单元 | `tests/urlparts.test.mjs`：绝对 URL 拆出域名与路径（含 query / hash / 端口）；相对 / 不透明协议安全降级 | 展示拆分正确；复制产物仍为完整 URL | ✅ `tests/urlparts.test.mjs` |
+
 ---
 
 ## 2. checklist §C 边界用例矩阵（16 项，全覆盖）
@@ -213,7 +224,7 @@ node scripts/check-panel-shell.mjs     # 期望：PASS (34/34)
 |------|------|----------|:--------:|
 | `scripts/check-syntax.mjs` | 全部 `extension/**/*.js` 语法（build/lint 共用） | `node scripts/check-syntax.mjs` | ✅ 15/15 |
 | `scripts/check-manifest.mjs` | AC-009 权限门禁 + devtools_page + 图标（17 项） | `node scripts/check-manifest.mjs` | ✅ 17/17 |
-| `scripts/check-panel-shell.mjs` | AC-012/016 面板外壳：7 列表头、DOM 契约、i18n 无裸中文（34 项） | `node scripts/check-panel-shell.mjs` | ✅ 34/34 |
+| `scripts/check-panel-shell.mjs` | AC-012/016 面板外壳：8 列表头、DOM 契约、i18n 无裸中文（44 项） | `node scripts/check-panel-shell.mjs` | ✅ 44/44 |
 | `scripts/check-zero-network.mjs` | AC-008/020 零网络 + 零持久化 + 无遥测（17 项） | `node scripts/check-zero-network.mjs` | ✅ 17/17 |
 | `npm test` | 全部单元用例（14 文件 / 264 用例，含增强新增 5 文件） | `node --test "tests/**/*.test.mjs"` | ✅ 264/264 |
 

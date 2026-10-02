@@ -9,7 +9,7 @@
   <img alt="Chrome" src="https://img.shields.io/badge/Chrome-latest-4285F4?logo=googlechrome&logoColor=white">
   <img alt="Edge" src="https://img.shields.io/badge/Edge-latest-0078D7?logo=microsoftedge&logoColor=white">
   <img alt="Dependencies" src="https://img.shields.io/badge/dependencies-0-brightgreen">
-  <img alt="Tests" src="https://img.shields.io/badge/tests-283%20passing-success">
+  <img alt="Tests" src="https://img.shields.io/badge/tests-302%20passing-success">
   <img alt="License" src="https://img.shields.io/badge/license-MIT-green">
 </p>
 
@@ -38,7 +38,9 @@ Raw Copy 在 DevTools 里新增一个独立面板，把这些信息**一次性�
   - **模式 A（默认）**：带 `===== REQUEST =====` / `===== RESPONSE =====` 标题段；
   - **模式 B**：纯原始拼接，无任何标题。
 - **字符级保真** — 不解析 JSON、不缩进、不排序、不转义、不加 Markdown 代码块；响应体按原始字符输出。
-- **实时请求列表** — 方法 / URL / 状态码 / 资源类型 / 耗时 / 大小 / 时间；内存最多保留最近 **1000** 条（环形缓存）。
+- **实时请求列表** — 方法 / 域名 / 路径 / 状态码 / 资源类型 / 耗时 / 大小 / 时间；URL 参考 DevTools 拆成「域名 + 路径」两列，长链接不再挤占整行；内存最多保留最近 **1000** 条（环形缓存）。
+- **默认隐藏静态资源** — 一键隐藏 `.js` / `.css` / 字体 / 图片 / 媒体 / PDF 等非 API 请求，只留可调试的 XHR / Fetch / Document；开关可随时恢复显示全部（隐藏项仍保留在内存）。
+- **清除网络日志** — 一键清空当前捕获列表，重新开始。
 - **搜索与过滤** — 按 URL 关键字搜索，按请求方法 / 状态码 / 资源类型过滤；列表支持虚拟滚动，千条不卡。
 - **大响应与二进制处理** — 超阈值提示；二进制以 `[Binary content omitted: <mime>, <bytes> bytes]` 标注；Base64 按 MIME 判断解码或标注。
 - **复制可靠** — 优先 `navigator.clipboard.writeText`，失败降级 `document.execCommand('copy')`；成功/失败均有提示。
@@ -131,6 +133,8 @@ extension/            # 扩展本体（可直接“加载已解压”）
     ├── capture.js         # 请求捕获 + 异步 getContent 保真取体
     ├── store.js           # 环形缓存(1000) + 原地回填 + 字节预算
     ├── filter.js          # 搜索/过滤
+    ├── hidefilter.js      # 静态资源判定 + 视图隐藏（零 import 纯逻辑）
+    ├── urlparts.js        # URL → 域名 / 路径（列表展示用）
     ├── render.js          # 列表渲染 + 虚拟滚动
     ├── selection.js       # 单选核心
     ├── multiselection.js  # 多选包装（Ctrl/Shift/全选）
@@ -141,7 +145,7 @@ extension/            # 扩展本体（可直接“加载已解压”）
     ├── content.js         # 大响应 / 二进制 / Base64 处理
     ├── clipboard.js       # 剪贴板写入 + 降级
     └── i18n.js            # 中文优先文案（预留英文）
-tests/                # 单元/接线测试（node:test，283 用例）
+tests/                # 单元/接线测试（node:test，302 用例）
 scripts/              # 零依赖门禁与打包脚本
 docs/                 # 安装/使用/里程碑/交付清单
 dist/                 # 打包后的发行 ZIP
@@ -154,7 +158,7 @@ dist/                 # 打包后的发行 ZIP
 要求：Node.js（内置 `node --test`，无需安装依赖）。
 
 ```bash
-npm test          # 运行全部单元/接线测试（283 用例）
+npm test          # 运行全部单元/接线测试（302 用例）
 npm run lint      # 语法检查（等价 build）
 npm run package   # 生成 dist/raw-copy-<version>.zip 并做体积/依赖/读回门禁
 ```

@@ -5,7 +5,7 @@
  * 独立读盘并逐项断言（零第三方依赖，仅 Node 内置模块）：
  *   1. extension/panel.html / extension/panel.js / extension/styles/panel.css 均存在
  *   2. panel.html 引用 styles/panel.css 且以 <script type="module" src="panel.js"> 加载
- *   3. panel.html 列表表头恰好 7 列（data-i18n="col.*"）
+ *   3. panel.html 列表表头恰好 8 列（data-i18n="col.*"）
  *   4. panel.html 含全部稳定 DOM 契约 id（REQ-005/012/013 / DEL-002）
  *   5. panel.html 不含任何裸中文（所有可见文案走 data-i18n；AC-016 / REQ-033）
  *   6. panel.js 的字符串字面量中不含中文（中文仅允许出现在注释里；AC-016）
@@ -120,14 +120,15 @@ function main() {
     /<script[^>]*type="module"[^>]*src="panel\.js"[^>]*>/u.test(html),
   );
 
-  // 3. 表头恰好 7 列
+  // 3. 表头恰好 8 列
   const colMatches = html.match(/data-i18n="col\.[A-Za-z]+"/gu) || [];
-  check('列表表头 7 列（data-i18n="col.*"）', colMatches.length === 7,
+  check('列表表头 8 列（data-i18n="col.*"）', colMatches.length === 8,
     'count=' + colMatches.length + ' [' + colMatches.join(', ') + ']');
 
   // 4. 稳定 DOM 契约 id（② 后：模式 toggle 与分段按钮移除，新增 copy-btn-a/b）
   const requiredIds = [
     'toolbar', 'search', 'filter-method', 'filter-status', 'filter-type',
+    'hide-static-toggle', 'list-count', 'clear-btn',
     'list', 'list-body', 'copy-btn', 'copy-btn-a', 'copy-btn-b', 'toast',
     'empty', 'copy-actions', 'privacy-link', 'copy-curl-btn',
     'context-menu', 'multiselect-actions', 'select-all-btn', 'copy-selected-btn',

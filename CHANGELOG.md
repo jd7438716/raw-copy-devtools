@@ -2,6 +2,19 @@
 
 本项目遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/) 与 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [Unreleased]
+
+### Added
+- **隐藏静态资源**：工具栏新增「隐藏静态资源」开关（**默认开启**），一键隐藏 `.js` / `.css` / 字体 / 图片 / 媒体 / PDF 等非 API 请求，只留 XHR / Fetch / Document；关闭开关即恢复显示全部（隐藏项**仍保留在内存**，不影响复制）。判定以 `resourceType` 为主、MIME 与 URL 扩展名辅助（含 PDF 特判）。
+- **清除网络日志**：工具栏新增「清除网络日志」按钮，一键清空当前捕获列表、选中与缓存。
+- **URL 显示简化**：列表把完整 URL 拆成「域名 + 路径」两列（参考 Chrome DevTools Network），长链接不再挤占整行；悬停域名/路径列显示完整 URL。**复制产物仍为完整 URL**，字符级保真契约不变。
+- 工具栏新增「显示 X/Y 条 · 已隐藏 Z」计数。
+- 新增模块：`src/hidefilter.js`（静态资源判定与视图隐藏）、`src/urlparts.js`（URL → 域名/路径）。
+- 新增测试：`tests/hidefilter.test.mjs`、`tests/urlparts.test.mjs`、`tests/panel-controls.test.mjs`（测试用例总数 283 → 302）。
+
+### Security
+- 权限与网络行为不变：仍仅 `clipboardWrite`；零网络调用、零持久化。
+
 ## [1.1.0] - 2026-10-02
 
 ### Added

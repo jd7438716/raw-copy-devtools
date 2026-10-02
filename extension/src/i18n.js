@@ -33,6 +33,8 @@ export const dict = {
     // ---- 列表表头（7 个字段）----
     'col.method': '方法',
     'col.url': 'URL',
+    'col.host': '域名',
+    'col.path': '路径',
     'col.status': '状态',
     'col.resourceType': '类型',
     'col.time': '耗时',
@@ -46,6 +48,9 @@ export const dict = {
     'filter.resourceType': '资源类型',
     'filter.all': '全部',
     'filter.clear': '清除筛选',
+
+    // ---- 隐藏静态资源开关 ----
+    'hide.toggle': '隐藏静态资源',
 
     // ---- 复制模式 A / B ----
     'mode.a': '简单格式化',
@@ -104,6 +109,9 @@ export const dict = {
     'selection.evicted': '选中的请求已被淘汰',
     'list.count': '共 {count} 条',
     'list.cached': '缓存 {count}/{capacity} 条',
+    'list.showCount': '显示 {shown}/{total} 条',
+    'list.hiddenCount': '显示 {shown}/{total} 条 · 已隐藏 {hidden}',
+    'list.clear': '清除网络日志',
     'app.loading': '加载中…',
 
     // ---- 右键菜单（DEL-001 / REQ-001）----
@@ -132,6 +140,8 @@ export const dict = {
     // ---- Columns (7) ----
     'col.method': 'Method',
     'col.url': 'URL',
+    'col.host': 'Domain',
+    'col.path': 'Path',
     'col.status': 'Status',
     'col.resourceType': 'Type',
     'col.time': 'Time',
@@ -145,6 +155,9 @@ export const dict = {
     'filter.resourceType': 'Resource type',
     'filter.all': 'All',
     'filter.clear': 'Clear filters',
+
+    // ---- Hide static assets toggle ----
+    'hide.toggle': 'Hide static assets',
 
     // ---- Copy modes A / B ----
     'mode.a': 'Formatted',
@@ -203,6 +216,9 @@ export const dict = {
     'selection.evicted': 'The selected request has been evicted',
     'list.count': '{count} total',
     'list.cached': 'Cached {count}/{capacity}',
+    'list.showCount': 'Showing {shown}/{total}',
+    'list.hiddenCount': 'Showing {shown}/{total} · {hidden} hidden',
+    'list.clear': 'Clear network log',
     'app.loading': 'Loading…',
 
     // ---- Context menu (DEL-001 / REQ-001) ----

@@ -10,7 +10,7 @@
 /* ---------- theme tokens ---------- */
 :root {
   --row-height: 28px;
-  --col-grid: 64px minmax(160px, 1fr) 64px 88px 64px 88px 168px;
+  --col-grid: 64px minmax(120px, 0.8fr) minmax(200px, 1.8fr) 64px 88px 64px 88px 168px;
 
   --bg: #ffffff;
   --bg-subtle: #f5f6f8;
@@ -123,6 +123,27 @@ body {
   flex: 1 1 auto;
 }
 
+/* Hide-static-assets toggle + hidden/showing counter (toolbar row 1). */
+.toolbar__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.toolbar__toggle input {
+  margin: 0;
+  cursor: pointer;
+}
+
+.toolbar__count {
+  color: var(--fg-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
 .filter {
   display: inline-flex;
   align-items: center;
@@ -214,6 +235,11 @@ body {
 .col--method {
   font-weight: 600;
   text-transform: uppercase;
+}
+
+/* Domain is secondary information; path carries the调试-relevant detail. */
+.col--host {
+  color: var(--fg-muted);
 }
 
 /* ---------- empty state ---------- */

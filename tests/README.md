@@ -61,7 +61,7 @@ node --test tests/i18n.test.mjs   # 只跑某个测试文件
 ```bash
 node scripts/check-syntax.mjs        # 15/15  extension/**/*.js 语法（= npm run build / lint）
 node scripts/check-manifest.mjs      # 17/17  AC-009 权限门禁 + devtools_page + 图标 + 版本 1.1.0
-node scripts/check-panel-shell.mjs   # 41/41  AC-012/016 面板外壳（7 列表头 / DOM 契约 / 无裸中文）
+node scripts/check-panel-shell.mjs   # 44/44  AC-012/016 面板外壳（8 列表头 / DOM 契约 / 无裸中文）
 node scripts/check-zero-network.mjs  # 17/17  AC-008/020 零网络 + 零持久化 + 无遥测
 ```
 

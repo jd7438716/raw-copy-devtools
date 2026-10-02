@@ -213,6 +213,7 @@ export async function createPanelHarness() {
   // 稳定 DOM 契约 id（与 panel.html / check-panel-shell.mjs 同源，② 后契约）。
   const ids = [
     'toolbar', 'search', 'filter-method', 'filter-status', 'filter-type',
+    'hide-static-toggle', 'list-count', 'clear-btn',
     'list', 'list-body', 'empty', 'copy-actions', 'copy-btn', 'copy-btn-a',
     'copy-btn-b', 'copy-curl-btn', 'multiselect-actions', 'select-all-btn',
     'copy-selected-btn', 'selected-count', 'context-menu', 'detail-pane',
@@ -311,15 +312,24 @@ export async function createPanelHarness() {
     while (rafQueue.length) rafQueue.shift()();
   }
 
-  /** 喂入一条 HAR-like 记录（id 递增，与 capture 归一化一致）。 */
-  function feed(id, url, body) {
+  /**
+   * 喂入一条 HAR-like 记录（id 递增，与 capture 归一化一致）。
+   *
+   * @param {number} id
+   * @param {string} [url]
+   * @param {string} [body]
+   * @param {{resourceType?:string, mimeType?:string, method?:string}} [overrides]
+   */
+  function feed(id, url, body, overrides) {
     if (!requestListener) {
       throw new Error('capture listener not installed');
     }
     const text = body === undefined ? '{"id":' + id + '}' : body;
+    const opts = overrides || {};
+    const mimeType = opts.mimeType || 'application/json';
     requestListener({
       request: {
-        method: 'GET',
+        method: opts.method || 'GET',
         url: url || 'https://x/' + id,
         httpVersion: 'HTTP/1.1',
         headers: [{ name: 'X', value: 'y' }],
@@ -327,12 +337,12 @@ export async function createPanelHarness() {
       response: {
         status: 200,
         statusText: 'OK',
-        headers: [{ name: 'Content-Type', value: 'application/json' }],
-        content: { text, mimeType: 'application/json', size: text.length },
+        headers: [{ name: 'Content-Type', value: mimeType }],
+        content: { text, mimeType, size: text.length },
       },
       time: 10,
       startedDateTime: '2026-10-02T10:00:00.000Z',
-      _resourceType: 'XHR',
+      _resourceType: opts.resourceType || 'XHR',
       getContent: (cb) => cb(text, undefined),
     });
   }
@@ -426,6 +436,17 @@ export async function createPanelHarness() {
   function tick() {
     return new Promise((resolve) => setTimeout(resolve, 0));
   }
+  /** 切换「隐藏静态资源」复选框并刷新视图。 */
+  function setHideStatic(on) {
+    const el = document._byId.get('hide-static-toggle');
+    el.checked = !!on;
+    el.dispatchEvent({ type: 'change' });
+    flushRaf();
+  }
+  /** 读取当前计数文案。 */
+  function getListCount() {
+    return document._byId.get('list-count').textContent;
+  }
 
   return {
     panel,
@@ -434,6 +455,8 @@ export async function createPanelHarness() {
     listBody,
     flushRaf,
     feed,
+    setHideStatic,
+    getListCount,
     rows,
     rowByIndex,
     clickRow,

@@ -56,16 +56,20 @@
             <option value="XHR">XHR</option>
             <option value="Fetch">Fetch</option>
             <option value="Document">Document</option>
-            <option value="Script">Script</option>
-            <option value="Stylesheet">Stylesheet</option>
-            <option value="Image">Image</option>
-            <option value="Font">Font</option>
-            <option value="Media">Media</option>
             <option value="Other">Other</option>
           </select>
         </label>
 
+        <label class="toolbar__toggle">
+          <input id="hide-static-toggle" type="checkbox" checked>
+          <span data-i18n="hide.toggle"></span>
+        </label>
+
         <span class="toolbar__spacer"></span>
+
+        <span id="list-count" class="toolbar__count" aria-live="polite"></span>
+
+        <button id="clear-btn" class="btn" type="button" data-i18n="list.clear"></button>
       </div>
 
       <!--
@@ -94,7 +98,8 @@
     <section id="list" class="list" role="grid" aria-rowcount="0" tabindex="0">
       <div class="list__header" role="row">
         <span class="col col--method" role="columnheader" data-i18n="col.method"></span>
-        <span class="col col--url" role="columnheader" data-i18n="col.url"></span>
+        <span class="col col--host" role="columnheader" data-i18n="col.host"></span>
+        <span class="col col--path" role="columnheader" data-i18n="col.path"></span>
         <span class="col col--status" role="columnheader" data-i18n="col.status"></span>
         <span class="col col--type" role="columnheader" data-i18n="col.resourceType"></span>
         <span class="col col--time" role="columnheader" data-i18n="col.time"></span>
